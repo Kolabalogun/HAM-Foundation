@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Shadows+Into+Light&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+:root {
+  font-family: "Montserrat", sans-serif !important;
+  line-height: 1.5;
+  font-weight: 400;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: white !important;
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  .bg-overlay {
+    @apply bg-[#00000073];
+  }
+  .center {
+    @apply max-w-7xl mx-auto px-5 xl:px-0;
+  }
+  .flexallcenter {
+    @apply flex items-center justify-center;
+  }
+  .line {
+    @apply w-full bg-[#3d3d3d] h-[1px];
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+a,
+p {
+  font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+  font-size: 59px;
+  font-weight: 700;
+}
+
+button {
+  cursor: pointer;
+}
+
+.herobg,
+.impactbg,
+.posterbg,
+.bannerbg {
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.herobg {
+  background-image: url("assets/hero.jpg");
+}
+.impactbg {
+  background-image: url("assets/hero2.png");
+}
+
+.posterbg {
+  background-image: url("assets/hero1.jpg");
+  background-attachment: fixed;
+}
+
+.postertxt {
+  font-family: "Shadows Into Light", cursive;
+}
+
+.bannerbg {
+  background-image: url("assets/hero3.png");
+  background-position: center;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 4px solid #fff;
+  border-right: 4px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border-bottom: 4px solid #ff6501;
+  border-left: 4px solid transparent;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.linked {
+  position: relative;
+  display: inline-block;
+}
+
+.linked::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #653332;
+  border-radius: 4px;
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale 0.25s;
+}
+.linked:hover::before {
+  scale: 1;
+}
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+  color: #fff;
+  opacity: 0.8;
+  background-color: #ff0000;
+  padding: 3px 25px;
+  cursor: pointer;
+  border-radius: 10px;
+  text-align: center;
+}
