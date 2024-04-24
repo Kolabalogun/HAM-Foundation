@@ -155,7 +155,7 @@ const OurTeam: React.FC = () => {
                   </div>
                   {/* Use Tailwind CSS transition classes and conditional rendering */}
                   <div
-                    className={`transition-all duration-500 ${
+                    className={`transition-all duration-1000 ${
                       activeIndex === idx
                         ? "max-h-[1000px]"
                         : "max-h-0 overflow-hidden"

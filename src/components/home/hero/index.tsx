@@ -13,10 +13,10 @@ type HeroType = {
 
 const Hero: React.FC<HeroType> = ({ onOpen, partnerOnOpen }) => {
   return (
-    <section className="h-[80vh] z-20" id="home">
+    <section className="h-[80vh]  " id="home">
       <Header />
 
-      <div className="relative z-10 text-white h-full herobg pt-5 sm:pt-0 ">
+      <div className="relative   text-white h-full herobg pt-5 sm:pt-0 ">
         <div className="h-full w-full bg-[#000000b6] absolute top-0 left-0 "></div>
 
         <div className="relative px-5 sm:px-10   h-full flex flex-col justify-center center">

@@ -37,7 +37,7 @@ const Footer = () => {
   ];
 
   return (
-    <section className="bg-primary py-40 text-white px-5 sm:px-10 ">
+    <section className="bg-primary py-40 font-medium text-white px-5 sm:px-10 ">
       <div className="center flex xl:flex-row w-full flex-col justify-between items-start px-5 gap-16  ">
         <div style={{ flex: 1 }} className="flex flex-1 flex-col">
           <div className="text-white flex items-center gap-2">

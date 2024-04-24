@@ -64,7 +64,7 @@ const Header = () => {
   ];
 
   return (
-    <nav className="z-50 ">
+    <nav className="z-50 relative ">
       <div className="flex">
         <div className="bg-secondary h-1 flex-1 rounded-br-lg" />
         <div className="bg-primary h-1 flex-1 rounded-bl-lg" />
@@ -101,22 +101,19 @@ const Header = () => {
                 Media
               </MenuButton>
               <MenuList>
-                <MenuItem>
-                  <Link
-                    to={NEWS_ROUTE}
+                <MenuItem as={Link} to={NEWS_ROUTE}>
+                  <p
                     className={`text-base font-medium linked cursor-pointer py-1    text-black dark:text-black  `}
                   >
                     News
-                  </Link>
+                  </p>
                 </MenuItem>
-                <MenuItem>
-                  {" "}
-                  <Link
-                    to={GALLERY_ROUTE}
+                <MenuItem as={Link} to={GALLERY_ROUTE}>
+                  <p
                     className={`text-base font-medium linked cursor-pointer py-1    text-black dark:text-black  `}
                   >
                     Photos & Videos
-                  </Link>
+                  </p>
                 </MenuItem>
               </MenuList>
             </Menu>

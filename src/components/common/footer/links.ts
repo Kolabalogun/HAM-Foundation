@@ -61,10 +61,3 @@ export const SocialLinks: NavLinksProps[] = [
     link: " ",
   },
 ];
-export const EventLinks: NavLinksProps[] = [
-  {
-    title: "Empoweering Futures",
-    date: "Aug 10, 2023",
-    link: "/article/1",
-  },
-];
