@@ -1,15 +1,4 @@
-import {
-  createContext,
-  useContext,
-  ReactNode,
-  FC,
-  useState,
-  useEffect,
-} from "react";
-import useFirestoreCollection from "../hook/useFiretoreCollection";
-import { fetchFirestoreData } from "../utils/fetchFirestoreData";
-import { About, Articles, Events, HomePageContents } from "../utils/types";
-import Loader from "../components/common/loader";
+import { createContext, useContext, ReactNode, FC, useState } from "react";
 
 export enum PageTye {
   home = "home",
@@ -24,12 +13,6 @@ interface AppContextProps {
   setloading: React.Dispatch<React.SetStateAction<boolean>>;
   pageType: string;
   setpageType: React.Dispatch<React.SetStateAction<PageTye>>;
-  eventsFromDB: Events[] | null;
-  articlesFromDB: Articles[] | null;
-  eventsLoader: boolean;
-  articlesLoader: boolean;
-  homePageContent: HomePageContents | null;
-  aboutPageContent: About | null;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -47,35 +30,6 @@ const AppProvider: FC<AppProviderProps> = ({ children }) => {
 
   // get projects from firestore
 
-  const { data: eventsFromDB, loader: eventsLoader } =
-    useFirestoreCollection<Events>("events");
-
-  const { data: articlesFromDB, loader: articlesLoader } =
-    useFirestoreCollection<Articles>("articles");
-
-  // get page contents
-
-  const [homePageContent, homePageContentF] = useState<HomePageContents | null>(
-    null
-  );
-  const [aboutPageContent, aboutPageContentF] = useState<About | null>(null);
-
-  const getPageContentDetail = async () => {
-    setloading(true);
-    const data = await fetchFirestoreData("contents", "hompage");
-    const aboutdata = await fetchFirestoreData("contents", "aboutpage");
-
-    if (data && aboutdata) {
-      homePageContentF(data as HomePageContents);
-      aboutPageContentF(aboutdata as About);
-    }
-    setloading(false);
-  };
-
-  useEffect(() => {
-    getPageContentDetail();
-  }, []);
-
   // if (loading || eventsLoader || articlesLoader) {
   //   return <Loader />;
   // }
@@ -87,12 +41,6 @@ const AppProvider: FC<AppProviderProps> = ({ children }) => {
         setloading,
         pageType,
         setpageType,
-        eventsFromDB,
-        eventsLoader,
-        articlesFromDB,
-        articlesLoader,
-        homePageContent,
-        aboutPageContent,
       }}
     >
       {children}

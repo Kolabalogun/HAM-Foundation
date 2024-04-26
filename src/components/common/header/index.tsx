@@ -95,8 +95,8 @@ const Header = () => {
               <MenuButton
                 variant={"outline"}
                 border={"none"}
-                _hover={"outline"}
-                _active={"outline"}
+                _hover={{ borderColor: "transparent" }}
+                _active={{ borderColor: "transparent" }}
                 fontWeight={"500"}
                 as={ButtonChakra}
                 rightIcon={<ChevronDownIcon className="h-4 font-medium" />}

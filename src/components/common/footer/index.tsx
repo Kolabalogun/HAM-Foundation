@@ -4,7 +4,7 @@ import Logo from "../../../assets/flogo.png";
 import phone from "../../../assets/phone-solid.svg";
 import mail from "../../../assets/envelope-solid.svg";
 import location from "../../../assets/location-dot-solid.svg";
-import { useGlobalContext } from "../../../context/useGlobalContext";
+
 import {
   CONTACT_ROUTE,
   HOME_ROUTE,
@@ -15,8 +15,6 @@ import {
 import { NavLinksProps } from "../header";
 
 const Footer = () => {
-  const { homePageContent } = useGlobalContext();
-
   const NavLinks: NavLinksProps[] = [
     {
       title: "Who are we",
@@ -72,18 +70,14 @@ const Footer = () => {
             <div className="flex items-center gap-5">
               <img src={location} alt="" className="h-4" />
               <p className="text-sm ">
-                {"Maayoit Healthcare Complex, Opp. GSS, old Jebba Rd, Iilorin Kwara State" ||
-                  homePageContent?.address ||
-                  "Ilorin, Kwara State, Nigeria"}
+                {
+                  "Maayoit Healthcare Complex, Opp. GSS, old Jebba Rd, Iilorin Kwara State"
+                }
               </p>
             </div>
             <a href="/" className="flex items-center gap-5">
               <img src={phone} alt="" className="h-4" />
-              <p className="text-sm ">
-                {"08032425386" ||
-                  homePageContent?.phoneNumber ||
-                  "+1 234 5677 890"}
-              </p>
+              <p className="text-sm ">{"+1 234 5677 890"}</p>
             </a>
             <a
               href="mailto:jafoundationosun@gmail.com"

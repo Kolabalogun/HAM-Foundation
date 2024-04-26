@@ -9,7 +9,6 @@ import useFirestoreCollection from "../hook/useFiretoreCollection";
 import Loader from "../components/common/loader";
 import timeAgo from "../utils/timeAgo";
 import { ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
-import { estimatedReadingTime, TextFormat } from "estimated-reading-time";
 
 const News: React.FC = () => {
   const { data, loader: loading } = useFirestoreCollection<NewsType>("news");
@@ -88,15 +87,7 @@ const News: React.FC = () => {
                       </div>
                       <div className="hidden lg:flex items-center gap-1">
                         <ClockIcon className="h-4" />
-                        <p>
-                          {
-                            estimatedReadingTime(
-                              article.paragraphOne,
-                              TextFormat.PLAIN_TEXT
-                            ).minutes
-                          }{" "}
-                          mins read
-                        </p>
+                        <p>2 mins read</p>
                       </div>
                     </div>
 

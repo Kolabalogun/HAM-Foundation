@@ -7,7 +7,7 @@ import mail from "../assets/envelope-solid - Copy.svg";
 import location from "../assets/location-dot-solid - Copy.svg";
 
 const Donation = () => {
-  const { setpageType, homePageContent } = useGlobalContext();
+  const { setpageType } = useGlobalContext();
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -29,13 +29,7 @@ const Donation = () => {
               <div className="flex gap-4 mt-8">
                 {SocialLinks.map((social) => (
                   <a
-                    href={
-                      social.title === "Twitter"
-                        ? homePageContent?.twitterLink
-                        : social.title === "Instagram"
-                        ? homePageContent?.instagramLink
-                        : homePageContent?.linkedInLink
-                    }
+                    href={social.link}
                     className="border border-[#b21a86] rounded-md p-1 cursor-pointer"
                   >
                     <img
@@ -50,19 +44,17 @@ const Donation = () => {
                 <div className="flex items-center gap-5">
                   <img src={location} alt="" className="h-4" />
                   <p className="text-sm font-medium">
-                    {homePageContent?.address || "Ilorin, Kwara State, Nigeria"}
+                    {"Ilorin, Kwara State, Nigeria"}
                   </p>
                 </div>
                 <a href="" className="flex items-center gap-5">
                   <img src={phone} alt="" className="h-4" />
-                  <p className="text-sm font-medium">
-                    {homePageContent?.phoneNumber || "+1 234 5677 890"}
-                  </p>
+                  <p className="text-sm font-medium">{"+1 234 5677 890"}</p>
                 </a>
                 <a href="" className="flex items-center gap-5">
                   <img src={mail} alt="" className="h-4" />
                   <p className="text-sm font-medium">
-                    {homePageContent?.email || "jafoundation@gmail.com"}
+                    {"jafoundation@gmail.com"}
                   </p>
                 </a>
               </div>

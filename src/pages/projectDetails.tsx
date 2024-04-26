@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { fetchFirestoreData } from "../utils/fetchFirestoreData";
 import { Link, useParams } from "react-router-dom";
-import { CommenType, News, Project } from "../utils/types";
+import { Project } from "../utils/types";
 import Loader from "../components/common/loader";
 import useFirestoreCollection from "../hook/useFiretoreCollection";
 import { Divider, Spinner, useToast } from "@chakra-ui/react";
@@ -19,7 +19,6 @@ import {
 } from "firebase/firestore";
 import showToast from "../components/common/Toast";
 import { db } from "../utils/Firebase";
-import { estimatedReadingTime, TextFormat } from "estimated-reading-time";
 
 const ProjectDetails: React.FC = () => {
   const { id } = useParams();
@@ -73,11 +72,11 @@ const ProjectDetails: React.FC = () => {
         .email("Invalid email address")
         .required("Please enter your email"),
     }),
-    onSubmit: (values: CommenType) => {
+    onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
       // sendEmail(values);
 
-      const { comments } = form;
+      const { comments } = form || { comments: [] };
 
       const newComments = [...comments, { ...values, id: dateId }];
 
@@ -86,7 +85,7 @@ const ProjectDetails: React.FC = () => {
   });
 
   // handle submit
-  const handleUpdate = async (values: CommenType[]) => {
+  const handleUpdate = async (values: unknown) => {
     setcLoading(true);
     try {
       // Update the document in Firestore
@@ -153,15 +152,7 @@ const ProjectDetails: React.FC = () => {
                     </div>
                     <div className="hidden lg:flex items-center gap-1">
                       <ClockIcon className="h-4" />
-                      <p>
-                        {
-                          estimatedReadingTime(
-                            form?.description,
-                            TextFormat.PLAIN_TEXT
-                          ).minutes
-                        }{" "}
-                        mins read
-                      </p>
+                      <p>2 mins read</p>
                     </div>
                   </div>
                 </div>
@@ -282,15 +273,7 @@ const ProjectDetails: React.FC = () => {
                                 />
                                 <div className="flex items-center gap-1">
                                   <ClockIcon className="h-4" />
-                                  <p>
-                                    {
-                                      estimatedReadingTime(
-                                        form?.description,
-                                        TextFormat.PLAIN_TEXT
-                                      ).minutes
-                                    }{" "}
-                                    mins read
-                                  </p>
+                                  <p>2 mins read</p>
                                 </div>
                               </div>
 

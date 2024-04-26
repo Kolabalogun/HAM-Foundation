@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Layout from "../components/container/layout";
-import { useGlobalContext } from "../context/useGlobalContext";
 
 import Education from "../assets/education.png";
 import Digital from "../assets/digital.png";
@@ -62,8 +61,6 @@ const focusAreaData: FocusAreaType[] = [
 ];
 
 const About: React.FC = () => {
-  const { aboutPageContent } = useGlobalContext();
-
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -75,7 +72,7 @@ const About: React.FC = () => {
           <div className="center relative pt-40 pb-10 grid grid-cols-1 gap-10  px-5 sm:px-10  ">
             <div className="flex items-center text-center flex-col  ">
               <h1 className=" text-3xl md:text-[40px]   font-semibold ">
-                {"Who are we" || aboutPageContent?.aboutTitle}
+                {"Who are we"}
               </h1>
               <div className="h-[3px] w-36 mt-4 mb-8 bg-primary"></div>
               {/* 

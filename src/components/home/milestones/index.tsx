@@ -18,7 +18,11 @@ const Milestones: React.FC = () => {
                 label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
                 placement="right"
               >
-                <Button variant="outline" border={"none"} _hover={"outline"}>
+                <Button
+                  variant="outline"
+                  border={"none"}
+                  _hover={{ borderColor: "transparent" }}
+                >
                   Jan 25
                 </Button>
               </Tooltip>
@@ -33,7 +37,11 @@ const Milestones: React.FC = () => {
                 label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
                 placement="right"
               >
-                <Button variant="outline" border={"none"} _hover={"outline"}>
+                <Button
+                  variant="outline"
+                  border={"none"}
+                  _hover={{ borderColor: "transparent" }}
+                >
                   Jan 25
                 </Button>
               </Tooltip>
@@ -48,7 +56,11 @@ const Milestones: React.FC = () => {
                 label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
                 placement="right"
               >
-                <Button variant="outline" border={"none"} _hover={"outline"}>
+                <Button
+                  variant="outline"
+                  border={"none"}
+                  _hover={{ borderColor: "transparent" }}
+                >
                   Jan 25
                 </Button>
               </Tooltip>
@@ -63,7 +75,11 @@ const Milestones: React.FC = () => {
                 label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
                 placement="right"
               >
-                <Button variant="outline" border={"none"} _hover={"outline"}>
+                <Button
+                  variant="outline"
+                  border={"none"}
+                  _hover={{ borderColor: "transparent" }}
+                >
                   Jan 25
                 </Button>
               </Tooltip>
@@ -78,7 +94,11 @@ const Milestones: React.FC = () => {
                 label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
                 placement="right"
               >
-                <Button variant="outline" border={"none"} _hover={"outline"}>
+                <Button
+                  variant="outline"
+                  border={"none"}
+                  _hover={{ borderColor: "transparent" }}
+                >
                   Jan 25
                 </Button>
               </Tooltip>
@@ -93,7 +113,11 @@ const Milestones: React.FC = () => {
                 label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
                 placement="right"
               >
-                <Button variant="outline" border={"none"} _hover={"outline"}>
+                <Button
+                  variant="outline"
+                  border={"none"}
+                  _hover={{ borderColor: "transparent" }}
+                >
                   Jan 25
                 </Button>
               </Tooltip>

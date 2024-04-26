@@ -8,7 +8,7 @@ export default function timeAgo(timestamp: Timestamp) {
 
     const secondsAgo = Math.floor((Date.now() - createdAt.getTime()) / 1000);
 
-    const intervals = {
+    const intervals: Record<string, number> = {
       year: 31536000,
       month: 2592000,
       week: 604800,
