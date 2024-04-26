@@ -1,23 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/container/layout";
 import { Link } from "react-router-dom";
-import { useGlobalContext } from "../context/useGlobalContext";
-import { Articles } from "../utils/types";
+import { News as NewsType } from "../utils/types";
 import { ArrowRightIcon, ClockIcon } from "@heroicons/react/24/solid";
 import { Divider } from "@chakra-ui/react";
-import { ChatBubbleLeftIcon } from "@heroicons/react/20/solid";
+
+import useFirestoreCollection from "../hook/useFiretoreCollection";
+import Loader from "../components/common/loader";
+import timeAgo from "../utils/timeAgo";
+import { ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
+import { estimatedReadingTime, TextFormat } from "estimated-reading-time";
 
 const News: React.FC = () => {
-  const { articlesFromDB } = useGlobalContext();
+  const { data, loader: loading } = useFirestoreCollection<NewsType>("news");
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Layout bannerTitle="Media1">
       <>
         <section className="center py-40">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-20  gap-x-10">
-            {articlesFromDB?.map((article: Articles) => (
+            {data?.map((article: NewsType) => (
               <div className="flex relative flex-col w-full shadow-lg">
-                <Link to={`/article/${article?.id}`}>
+                <Link to={`/news/${article?.id}`}>
                   <div className="cursor-pointer   h-[300px]   ">
                     <img
                       src={article?.mainImg}
@@ -33,7 +45,7 @@ const News: React.FC = () => {
                       {article?.date}
                     </div>
                     <Link
-                      to={`/article/${article?.id}`}
+                      to={`/news/${article?.id}`}
                       className="text-black uppercase text-[16px]  font-semibold mb-[15px] "
                     >
                       {article?.title}
@@ -48,10 +60,11 @@ const News: React.FC = () => {
 
                     <Divider my={6} />
 
-                    <div className="flex text-xs items-center justify-between gap-2">
+                    <div className="flex text-xs items-center lg:justify-between gap-2">
                       <div className="flex items-center ">
-                        <p>HAM, 2 Months ago </p>
+                        <p>HAM, {timeAgo(article?.timestamp)}</p>
                       </div>
+
                       <Divider
                         orientation="vertical"
                         size={"20px"}
@@ -59,20 +72,31 @@ const News: React.FC = () => {
                         colorScheme={"#000"}
                         borderColor={"#000"}
                       />
+
                       <div className="flex items-center gap-1">
-                        <ChatBubbleLeftIcon className="h-4" />
-                        <p>2 comments</p>
+                        <ChatBubbleOvalLeftIcon className="h-4" />
+                        <p>{article?.comments?.length} comments</p>
                       </div>
-                      <Divider
-                        orientation="vertical"
-                        size={"20px"}
-                        height={6}
-                        colorScheme={"#000"}
-                        borderColor={"#000"}
-                      />
-                      <div className="flex items-center gap-1">
+                      <div className="hidden lg:flex">
+                        <Divider
+                          orientation="vertical"
+                          size={"20px"}
+                          height={6}
+                          colorScheme={"#000"}
+                          borderColor={"#000"}
+                        />
+                      </div>
+                      <div className="hidden lg:flex items-center gap-1">
                         <ClockIcon className="h-4" />
-                        <p>2 mins read</p>
+                        <p>
+                          {
+                            estimatedReadingTime(
+                              article.paragraphOne,
+                              TextFormat.PLAIN_TEXT
+                            ).minutes
+                          }{" "}
+                          mins read
+                        </p>
                       </div>
                     </div>
 

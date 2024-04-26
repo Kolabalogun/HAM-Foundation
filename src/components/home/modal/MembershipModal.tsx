@@ -11,6 +11,8 @@ import {
 
 import { useState } from "react";
 import showToast from "../../common/Toast";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../../../utils/Firebase";
 
 type MembershipType = {
   onClose: () => void;
@@ -41,14 +43,29 @@ const MembershipModal: React.FC<MembershipType> = ({ onClose, isOpen }) => {
   const { name, email, description, phoneNumber, fieldOfIntrest } = form;
 
   // Function to handle form submission
-  const handleSubmit = () => {
-    setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
+  const handleSubmit = async () => {
+    if (name && email && description && phoneNumber && fieldOfIntrest) {
+      setLoading(true);
 
-      showToast(toast, "HAM.", "success", "Received form submission");
-    }, 3000);
+      try {
+        await addDoc(collection(db, "memberships"), {
+          ...form,
+
+          timestamp: serverTimestamp(),
+        });
+        showToast(toast, "HAM.", "success", "Received form submission");
+        setForm(initialState);
+
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        showToast(toast, "HAM.", "error", "Form submission failed");
+        setLoading(false);
+      }
+    } else {
+      return showToast(toast, "HAM.", "error", "Please fill all fields");
+    }
   };
 
   // Return the JSX structure of the MembershipModal component
@@ -167,7 +184,7 @@ const MembershipModal: React.FC<MembershipType> = ({ onClose, isOpen }) => {
               colorScheme="#0a0a32"
               className={`bg-primary text-white`}
             >
-              Submit Now
+              {Loading ? "Loading..." : "Submit Now"}
             </Button>
             {/* Close button */}
             <Button

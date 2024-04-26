@@ -9,7 +9,7 @@ const useFirestoreCollection = <T>(collectionName: string) => {
   useEffect(() => {
     const q = query(
       collection(db, collectionName),
-      orderBy("createdAt", "desc")
+      orderBy("timestamp", "desc")
     );
 
     const unsubscribe = onSnapshot(

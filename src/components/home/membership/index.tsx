@@ -6,7 +6,7 @@ const Membership = () => {
   return (
     <section className="center py-40   px-5 sm:px-10 ">
       <div className="">
-        <h1 className="text-[#262626]  text-[40px]    font-semibold mb-14">
+        <h1 className="text-[#262626]  text-[38px]    font-semibold mb-14">
           Our Membership
         </h1>
         <div className="xl:grid-cols-2 grid grid-cols-1 xl:gap-10 gap-[100px]">
@@ -23,7 +23,7 @@ const Membership = () => {
               drive lasting impact.
             </p>
 
-            <div className="flex gap-4 items-center text-primary mt-6 cursor-pointer font-medium text-lg">
+            <div className="flex gap-4 items-center text-primary mt-6 cursor-pointer font-medium text-base">
               <p>Become a member</p>
 
               <ArrowRightIcon className="h-6 font-medium" />
@@ -59,7 +59,7 @@ const Membership = () => {
               change and impact lives
             </p>
 
-            <div className="flex gap-4 items-center text-primary mt-6 cursor-pointer font-medium text-lg">
+            <div className="flex gap-4 items-center text-primary mt-6 cursor-pointer font-medium text-base">
               <p>Donate now</p>
 
               <ArrowRightIcon className="h-6 font-medium" />

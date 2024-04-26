@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export type HomePageContents = {
   aboutCaption: string;
   aboutImage: string;
@@ -53,25 +55,37 @@ export type About = {
   visionImg: string;
 };
 
-export type Events = {
+export type Project = {
   id: string;
-  title: string;
-  location: string;
+  name: string;
   date: string;
-  image: string;
-  caption: string;
+  mainImg: string;
+  description: string;
 };
-export type Articles = {
+
+export type Members = {
+  id: string;
+  name: string;
+  role: string;
+  date: string;
+  imageUrl: string;
+  description: string;
+};
+export type News = {
   id: string;
   title: string;
   date: string;
   mainImg: string;
-  secondImg: string;
-  thirdImg: string;
-  fourthImg: string;
-  fifthImg: string;
+  timestamp: Timestamp;
   paragraphOne: string;
-  paragraphTwo: string;
+  comments: CommenType[];
+};
+
+export type CommenType = {
+  id: string;
+  firstName: string;
+  message: string;
+  email: string;
 };
 
 export enum PageTye {

@@ -1,59 +1,30 @@
 import React from "react";
 import Layout from "../components/container/layout";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import useFirestoreCollection from "../hook/useFiretoreCollection";
+import Loader from "../components/common/loader";
 
 type VideoDataType = {
-  link: string;
+  youtubeLink: string;
   date: string;
   description: string;
-  image?: string;
+  name: string;
 };
 
-const videoData: VideoDataType[] = [
-  {
-    link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    date: "2024-04-21",
-    description: "This is video 1 description.",
-  },
-  {
-    link: "https://www.youtube.com/watch?v=2ZIpFytCSVc",
-    date: "2024-04-20",
-    description: "This is video 2 description.",
-  },
-
-  {
-    link: "https://www.youtube.com/watch?v=YOa7ZjxRuKM",
-    date: "2024-04-17",
-    description: "This is video 5 description.",
-  },
-  {
-    link: "https://www.youtube.com/watch?v=Y66j_BUCBMY",
-    date: "2024-04-16",
-    description: "This is video 6 description.",
-  },
-  {
-    link: "https://www.youtube.com/watch?v=3tmd-ClpJxA",
-    date: "2024-04-15",
-    description: "This is video 7 description.",
-  },
-
-  {
-    link: "https://www.youtube.com/watch?v=ZXsQAXx_ao0",
-    date: "2024-04-13",
-    description: "This is video 9 description.",
-  },
-];
-
-const imageUrls = [
-  "https://source.unsplash.com/random",
-  "https://source.unsplash.com/collection/190727/800x600",
-  "https://source.unsplash.com/collection/190728/800x600",
-  "https://source.unsplash.com/collection/190729/800x600",
-  "https://source.unsplash.com/collection/190730/800x600",
-  "https://source.unsplash.com/collection/190731/800x600",
-];
+type ImageType = {
+  imageUrl: string;
+  name: string;
+};
 
 const Gallery: React.FC = () => {
+  const { data, loader: loading } =
+    useFirestoreCollection<VideoDataType>("youtubeVideos");
+
+  const { data: images, loader } = useFirestoreCollection<ImageType>("images");
+
+  if (loading || loader) {
+    return <Loader />;
+  }
   return (
     <Layout bannerTitle="Media2">
       <>
@@ -61,12 +32,12 @@ const Gallery: React.FC = () => {
           <h1 className="text-4xl mb-10">Photos & Videos</h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {videoData?.map((project: VideoDataType, idx) => (
+            {data?.map((project: VideoDataType, idx) => (
               <div key={idx} className=" mb-16">
                 <iframe
                   width="100%"
                   height="100%"
-                  src={project.link.replace("watch?v=", "embed/")}
+                  src={project.youtubeLink.replace("watch?v=", "embed/")}
                   title={`Video ${idx + 1}`}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
@@ -74,7 +45,7 @@ const Gallery: React.FC = () => {
                 ></iframe>
 
                 <div className="py-2 flex flex-col gap-2">
-                  <p className=" ">{project.date}</p>
+                  <p className=" ">{project.name}</p>
                   <p className=" ">{project.description}</p>
                 </div>
               </div>
@@ -91,9 +62,13 @@ const Gallery: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-32">
-            {imageUrls?.map((project, idx) => (
+            {images?.map((project: ImageType, idx) => (
               <div key={idx} className=" w-full  h-96">
-                <img src={project} alt="" className="object-cover h-full" />
+                <img
+                  src={project.imageUrl}
+                  alt={project.name}
+                  className="object-cover h-full"
+                />
               </div>
             ))}
           </div>

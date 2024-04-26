@@ -70,7 +70,7 @@ const Header = () => {
         <div className="bg-primary h-1 flex-1 rounded-bl-lg" />
       </div>
       <div className="  center   py-4 md:py-5 flex items-center justify-between px-5 sm:px-10 ">
-        <Link to={HOME_ROUTE} className="h-10 md:h-16">
+        <Link to={HOME_ROUTE} className="h-14 md:h-16">
           <img src={Logo} alt="Logo" className="h-full" />
         </Link>
         {isAboveMediumScreens ? (
@@ -165,6 +165,33 @@ const Header = () => {
                 {title}
               </Link>
             ))}
+
+            <Link
+              to={NEWS_ROUTE}
+              className={
+                "text-base font-medium linked cursor-pointer py-2  mx-10 text-black dark:text-black  "
+              }
+            >
+              News
+            </Link>
+
+            <Link
+              to={GALLERY_ROUTE}
+              className={
+                "text-base font-medium linked cursor-pointer py-2  mx-10 text-black dark:text-black  "
+              }
+            >
+              Photos & Videos
+            </Link>
+
+            <Link
+              to={CONTACT_ROUTE}
+              className={
+                "text-base font-medium linked cursor-pointer py-2  mx-10 text-black dark:text-black  "
+              }
+            >
+              Contact Us
+            </Link>
           </div>
         </div>
       )}

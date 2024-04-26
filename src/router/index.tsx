@@ -36,6 +36,7 @@ const router = createBrowserRouter([
     path: NEWS_ROUTE,
     element: <News />,
   },
+
   {
     path: GALLERY_ROUTE,
     element: <Gallery />,
