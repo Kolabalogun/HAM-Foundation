@@ -30,19 +30,19 @@ const focusAreaData: FocusAreaType[] = [
   },
   {
     img: Agric,
-    title: "Agriculture/Food Security",
+    title: "Agriculture & Food Security",
     decription:
       "Enhance agricultural practices for food security and fostering unity among farmers and stakeholders in the sector",
   },
   {
     img: Health,
-    title: "Health/Wellbeing",
+    title: "Health & Wellbeing",
     decription:
       "Invest in healthcare infrastructure for better access and quality services and promoting community wellbeing and preventive healthcare initiatives",
   },
   {
     img: Partner,
-    title: "Partnership/Collaboration",
+    title: "Partnership",
     decription:
       "Form strategic partnerships with organizations and stakeholders for project success, and emphasizing collaboration's importance in effective program implementation",
   },
@@ -100,11 +100,15 @@ const About: React.FC = () => {
           <div className="grid lg:grid-cols-3 gap-16 my-16 grid-cols-1">
             {focusAreaData?.map((focusArea, idx) => (
               <div className="flex gap-4" key={idx}>
-                <div className="">
-                  <img src={focusArea.img} alt="" />
+                <div className="h-24 w-48 ">
+                  <img
+                    src={focusArea.img}
+                    alt=""
+                    className="  h-full w-full object-contain "
+                  />
                 </div>
-                <div className="flex flex-col gap-4">
-                  <p className="font-semibold text-xl">{focusArea.title}</p>
+                <div className="flex  flex-col gap-4">
+                  <p className="font-semibold text-xl ">{focusArea.title}</p>
                   <p className="font-medium">{focusArea.decription}</p>
                 </div>
               </div>
