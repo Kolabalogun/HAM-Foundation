@@ -13,10 +13,11 @@ import {
   MenuItem,
   Button as ButtonChakra,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../../context/useGlobalContext";
 import {
   CONTACT_ROUTE,
+  DONATION_ROUTE,
   GALLERY_ROUTE,
   HOME_ROUTE,
   NEWS_ROUTE,
@@ -32,6 +33,8 @@ export type NavLinksProps = {
 
 const Header = () => {
   const { pageType } = useGlobalContext();
+
+  const navigate = useNavigate();
 
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const [isAboveMediumScreens, setIsAboveMediumScreens] = useState<boolean>(
@@ -138,7 +141,11 @@ const Header = () => {
 
         {isAboveMediumScreens && (
           <div className="">
-            <Button title="Donate Now" size="sm" />
+            <Button
+              func={() => navigate(DONATION_ROUTE)}
+              title="Donate Now"
+              size="sm"
+            />
           </div>
         )}
       </div>
@@ -182,6 +189,15 @@ const Header = () => {
               }
             >
               Photos & Videos
+            </Link>
+
+            <Link
+              to={DONATION_ROUTE}
+              className={
+                "text-base font-medium linked cursor-pointer py-2  mx-10 text-black dark:text-black  "
+              }
+            >
+              Donations
             </Link>
 
             <Link

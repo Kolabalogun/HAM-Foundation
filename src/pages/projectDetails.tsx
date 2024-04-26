@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { fetchFirestoreData } from "../utils/fetchFirestoreData";
 import { Link, useParams } from "react-router-dom";
-import { CommenType, News } from "../utils/types";
+import { CommenType, News, Project } from "../utils/types";
 import Loader from "../components/common/loader";
 import useFirestoreCollection from "../hook/useFiretoreCollection";
 import { Divider, Spinner, useToast } from "@chakra-ui/react";
@@ -21,13 +21,13 @@ import showToast from "../components/common/Toast";
 import { db } from "../utils/Firebase";
 import { estimatedReadingTime, TextFormat } from "estimated-reading-time";
 
-const BlogDetails: React.FC = () => {
+const ProjectDetails: React.FC = () => {
   const { id } = useParams();
   const toast = useToast();
 
-  const [form, setform] = useState<News | null>(null);
+  const [form, setform] = useState<Project | null>(null);
 
-  const { data, loader } = useFirestoreCollection<News>("news");
+  const { data, loader } = useFirestoreCollection<Project>("pastprojects");
 
   const [loading, setloading] = useState<boolean>(false);
   const [cLoading, setcLoading] = useState<boolean>(false);
@@ -41,9 +41,9 @@ const BlogDetails: React.FC = () => {
 
   const getPageContentDetail = async (noReload?: boolean) => {
     noReload && setloading(true);
-    const data = await fetchFirestoreData("news", id);
+    const data = await fetchFirestoreData("pastprojects", id);
     if (data) {
-      setform(data as News);
+      setform(data as Project);
     }
     setloading(false);
   };
@@ -90,14 +90,14 @@ const BlogDetails: React.FC = () => {
     setcLoading(true);
     try {
       // Update the document in Firestore
-      const collectionRef = collection(db, "news");
+      const collectionRef = collection(db, "pastprojects");
       const docRef = doc(collectionRef, id);
       await updateDoc(docRef, {
         ...form,
         comments: values,
         updatedAt: serverTimestamp(),
       });
-      showToast(toast, "News", "success", "Comment Successfully Uploaded");
+      showToast(toast, "Projects", "success", "Comment Successfully Uploaded");
 
       getPageContentDetail();
 
@@ -112,7 +112,7 @@ const BlogDetails: React.FC = () => {
   if (loading || !form) return <Loader />;
 
   return (
-    <Layout bannerTitle="Media1">
+    <Layout bannerTitle="Projects">
       <>
         <section className="center py-40">
           <div className="flex gap-10 lg:gap-20 flex-col lg:flex-row">
@@ -126,7 +126,7 @@ const BlogDetails: React.FC = () => {
                   />
                 </div>
                 <div className="  my-10">
-                  <h1 className=" text-4xl font-semibold  ">{form?.title}</h1>
+                  <h1 className=" text-4xl font-semibold  ">{form?.name}</h1>
                   <div className="flex text-xs items-center   gap-2 mt-3">
                     <div className="flex items-center ">
                       <p>HAM, {timeAgo(form?.timestamp)}</p>
@@ -156,7 +156,7 @@ const BlogDetails: React.FC = () => {
                       <p>
                         {
                           estimatedReadingTime(
-                            form?.paragraphOne,
+                            form?.description,
                             TextFormat.PLAIN_TEXT
                           ).minutes
                         }{" "}
@@ -170,7 +170,7 @@ const BlogDetails: React.FC = () => {
                   <p
                     className="text-sm font-medium leading-6"
                     dangerouslySetInnerHTML={{
-                      __html: `${form?.paragraphOne}`,
+                      __html: `${form?.description}`,
                     }}
                   />
                 </div>
@@ -218,7 +218,7 @@ const BlogDetails: React.FC = () => {
                 </div>
               ) : (
                 <div className="">
-                  {data?.slice(0, 3).map((article: News) => {
+                  {data?.slice(0, 3).map((article: Project) => {
                     if (article?.id !== id) {
                       return (
                         <div className="flex relative flex-col w-full shadow-lg">
@@ -241,13 +241,13 @@ const BlogDetails: React.FC = () => {
                                 to={`/news/${article?.id}`}
                                 className="text-black uppercase text-[16px]  font-semibold mb-[15px] "
                               >
-                                {article?.title}
+                                {article?.name}
                               </Link>
 
                               <p
                                 className="mt-4 text-black "
                                 dangerouslySetInnerHTML={{
-                                  __html: `${article?.paragraphOne.substring(
+                                  __html: `${article?.description.substring(
                                     0,
                                     200
                                   )}...`,
@@ -285,7 +285,7 @@ const BlogDetails: React.FC = () => {
                                   <p>
                                     {
                                       estimatedReadingTime(
-                                        form?.paragraphOne,
+                                        form?.description,
                                         TextFormat.PLAIN_TEXT
                                       ).minutes
                                     }{" "}
@@ -384,4 +384,4 @@ const BlogDetails: React.FC = () => {
   );
 };
 
-export default BlogDetails;
+export default ProjectDetails;

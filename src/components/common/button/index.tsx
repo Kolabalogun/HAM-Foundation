@@ -24,11 +24,11 @@ const Button: React.FC<ButtonProp> = ({
         e.preventDefault();
         func && func();
       }}
-      className={`  flex items-center justify-center gap-3 rounded-lg   px-4 py-3 font-medium ${
+      className={`  flex items-center   gap-3 rounded-lg   px-4 py-3 font-medium ${
         size === "sm" ? "px-4 py-3 " : "px-5 py-5"
       } ${
         color === "plain"
-          ? " px-9  bg-transparent border-white border-2  text-[#fff] "
+          ? " pr-11 bg-transparent border-white border-2  text-[#fff] "
           : "   bg-primary text-white  hover:bg-[#da611b] "
       }  `}
     >

@@ -39,7 +39,7 @@ const Donation = () => {
                     className="border border-[#b21a86] rounded-md p-1 cursor-pointer"
                   >
                     <img
-                      src={social.img2}
+                      src={social.img}
                       alt={social.title}
                       className="h-5 w-5"
                     />
@@ -73,8 +73,8 @@ const Donation = () => {
                 Kindly make your donations to this Account
               </h1>
               <h1 className="text-2xl mt-5">Jaiz Bank</h1>
-              <h1 className="text-2xl mt-5">Jumoke Arogundade Foundation</h1>
-              <h1 className="text-2xl mt-5">0011204408</h1>
+              <h1 className="text-2xl mt-5">HAM Foundation</h1>
+              <h1 className="text-2xl mt-5">1234567890</h1>
               <h1 className="text-xl mt-5">Thank you.</h1>
             </div>
           </div>

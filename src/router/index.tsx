@@ -9,12 +9,14 @@ import Donation from "../pages/donation";
 import OurTeam from "../pages/ourteam";
 import News from "../pages/news";
 import Gallery from "../pages/gallery";
+import ProjectDetails from "../pages/projectDetails";
 
 export const HOME_ROUTE = "/";
 export const WHO_ARE_WE_ROUTE = "/who-are-we";
 export const OUR_TEAM_ROUTE = "/our-team";
 export const NEWS_ROUTE = "/news";
 export const NEWS_DETAILS_ROUTE = "/news/:id";
+export const PROJECT_DETAILS_ROUTE = "/projects/:id";
 export const GALLERY_ROUTE = "/gallery";
 export const DONATION_ROUTE = "/donations";
 export const CONTACT_ROUTE = "/contact-us";
@@ -44,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: NEWS_DETAILS_ROUTE,
     element: <BlogDetails />,
+  },
+  {
+    path: PROJECT_DETAILS_ROUTE,
+    element: <ProjectDetails />,
   },
   {
     path: DONATION_ROUTE,

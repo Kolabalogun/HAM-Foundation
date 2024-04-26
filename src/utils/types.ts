@@ -61,6 +61,8 @@ export type Project = {
   date: string;
   mainImg: string;
   description: string;
+  comments: CommenType[];
+  timestamp: Timestamp;
 };
 
 export type Members = {

@@ -19,7 +19,7 @@ const Projects: React.FC<ProjectType> = ({ projects }) => {
 
         <div className="my-10 flex items-center flex-col lg:flex-row lg:overflow-x-scroll    gap-9">
           {projects?.map((event: Project) => (
-            <Link className=" " key={event?.id} to={`/event/${event.id}`}>
+            <Link className=" " key={event?.id} to={`/projects/${event.id}`}>
               <div
                 className="flex flex-col justify-end    bg-cover px-8 py-10 bg-center relative h-[500px] w-[350px]  "
                 style={{ backgroundImage: `url(${event.mainImg})` }}

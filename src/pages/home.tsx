@@ -13,6 +13,7 @@ import PartnershipModal from "../components/home/modal/PartnershipModal";
 import useFirestoreCollection from "../hook/useFiretoreCollection";
 import Loader from "../components/common/loader";
 import { Project } from "../utils/types";
+import Milestones from "../components/home/milestones";
 
 const Home: React.FC = () => {
   const { setpageType } = useGlobalContext();
@@ -45,6 +46,7 @@ const Home: React.FC = () => {
         <Roles />
         <Impact />
         <Projects projects={data} />
+        <Milestones />
         <Membership />
         <Footer />
       </main>
