@@ -1,9 +1,7 @@
-import { Link as RouterLink } from "react-router-dom";
 import Header from "../../common/header";
 import HandImg from "../../../assets/hand.png";
 import MemberImg from "../../../assets/member.png";
 import Button from "../../common/button";
-import { DONATION_ROUTE } from "../../../router";
 import React from "react";
 
 type HeroType = {
@@ -29,23 +27,23 @@ const Hero: React.FC<HeroType> = ({ onOpen, partnerOnOpen }) => {
           </div>
 
           <div className="flex md:flex-row flex-col my-6 gap-6 md:gap-12 ">
-            <RouterLink to={DONATION_ROUTE} className="lg:text-lg ">
-              <Button
-                title="Become a Member"
-                iconLeft={<img src={MemberImg} className="h-5" />}
-                size="lg"
-                func={onOpen}
-              />
-            </RouterLink>
-            <RouterLink to={DONATION_ROUTE} className="lg:text-lg  ">
-              <Button
-                title="Partner with us"
-                iconLeft={<img src={HandImg} className="h-5" />}
-                size="lg"
-                color="plain"
-                func={partnerOnOpen}
-              />
-            </RouterLink>
+            {/* <RouterLink to={DONATION_ROUTE} className="lg:text-lg "> */}
+            <Button
+              title="Become a Member"
+              iconLeft={<img src={MemberImg} className="h-5" />}
+              size="lg"
+              func={onOpen}
+            />
+            {/* </RouterLink> */}
+            {/* <RouterLink to={DONATION_ROUTE} className="lg:text-lg  "> */}
+            <Button
+              title="Partner with us"
+              iconLeft={<img src={HandImg} className="h-5" />}
+              size="lg"
+              color="plain"
+              func={partnerOnOpen}
+            />
+            {/* </RouterLink> */}
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ const Home: React.FC = () => {
         <Impact />
         <Projects projects={data} />
         <Milestones />
-        <Membership />
+        <Membership onOpen={onOpen} />
         <Footer />
       </main>
     </>
