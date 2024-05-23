@@ -53,7 +53,11 @@ const Gallery: React.FC = () => {
           </div>
 
           <div className="my-16">
-            <a className=" flex items-center flex-col">
+            <a
+              href="https://www.youtube.com/"
+              target="_blank"
+              className=" flex items-center flex-col"
+            >
               <span className=" flex gap-4 text-white text-center  px-8 py-5  bg-primary      ">
                 Visit our YouTube Channel for more Videos
                 <ArrowRightIcon className="h-6 font-medium text-white" />
