@@ -10,7 +10,7 @@ const Banner: React.FC<BannerType> = ({ bannerTitle }) => {
     <section className="bannerbg  text-white   relative">
       <div className="h-full w-full bg-[#000000b6] absolute top-0 left-0 "></div>
 
-      <div className="center ">
+      <div className="center sm:px-16">
         <div className="flex flex-col py-32 relative ">
           <h1 className="text-white text-4xl   font-semibold ">
             {bannerTitle === "Media1"

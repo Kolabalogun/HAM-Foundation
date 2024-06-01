@@ -15,7 +15,7 @@ const Layout: React.FC<LayoutType> = ({ children, bannerTitle }) => {
       <Header />
       <Banner bannerTitle={bannerTitle} />
 
-      {children}
+      <div className="sm:px-16">{children}</div>
 
       <Footer />
     </main>

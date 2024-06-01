@@ -54,7 +54,7 @@ const Gallery: React.FC = () => {
 
           <div className="my-16">
             <a
-              href="https://www.youtube.com/"
+              href="https://www.youtube.com/@HassanatAttairuMankoFoundation"
               target="_blank"
               className=" flex items-center flex-col"
             >

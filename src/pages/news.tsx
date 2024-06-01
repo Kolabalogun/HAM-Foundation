@@ -51,7 +51,7 @@ const News: React.FC = () => {
                     </Link>
 
                     <p
-                      className="mt-4 text-black "
+                      className="mt-4   text-black "
                       dangerouslySetInnerHTML={{
                         __html: `${article?.paragraphOne.substring(0, 200)}...`,
                       }}

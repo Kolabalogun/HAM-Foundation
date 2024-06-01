@@ -39,39 +39,42 @@ const OurTeam: React.FC = () => {
 
         <section className="center py-20">
           <div className="grid lg:grid-cols-3 gap-16 my-16 grid-cols-1">
-            {data?.map((team: Members, idx) => (
-              <div className="flex flex-col gap-4" key={idx}>
-                <div className="">
-                  <img src={team.imageUrl} alt="" />
-                </div>
-                <div className="flex flex-col gap-4">
-                  <p className="font-semibold text-xl">{team.name}</p>
-                  <p className=" ">{team.role}</p>
-                </div>
-                <div className="border-[1px] border-black flex-col flex p-3 text-sm font-medium">
-                  <div className="flex justify-between items-center">
-                    <p className="text-base">Read Bio</p>
-                    <div onClick={() => handleAccordionClick(idx)}>
-                      {activeIndex === idx ? (
-                        <MinusIcon className="h-4" />
-                      ) : (
-                        <PlusIcon className="h-4" />
-                      )}
+            {data
+              ?.slice()
+              .reverse()
+              ?.map((team: Members, idx) => (
+                <div className="flex flex-col gap-4" key={idx}>
+                  <div className="">
+                    <img src={team.imageUrl} alt="" />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <p className="font-semibold text-xl">{team.name}</p>
+                    <p className=" ">{team.role}</p>
+                  </div>
+                  <div className="border-[1px] border-black flex-col flex p-3 text-sm font-medium">
+                    <div className="flex justify-between items-center">
+                      <p className="text-base">Read Bio</p>
+                      <div onClick={() => handleAccordionClick(idx)}>
+                        {activeIndex === idx ? (
+                          <MinusIcon className="h-4" />
+                        ) : (
+                          <PlusIcon className="h-4" />
+                        )}
+                      </div>
+                    </div>
+                    {/* Use Tailwind CSS transition classes and conditional rendering */}
+                    <div
+                      className={`transition-all duration-1000 ${
+                        activeIndex === idx
+                          ? "max-h-[1000px]"
+                          : "max-h-0 overflow-hidden"
+                      }`}
+                    >
+                      <p className="mt-4">{team.description}</p>
                     </div>
                   </div>
-                  {/* Use Tailwind CSS transition classes and conditional rendering */}
-                  <div
-                    className={`transition-all duration-1000 ${
-                      activeIndex === idx
-                        ? "max-h-[1000px]"
-                        : "max-h-0 overflow-hidden"
-                    }`}
-                  >
-                    <p className="mt-4">{team.description}</p>
-                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </section>
       </>

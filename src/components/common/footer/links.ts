@@ -2,7 +2,7 @@ import Twitter from "../../../assets/twitter.svg";
 import Instagram from "../../../assets/instagram.svg";
 
 import LinkedIn from "../../../assets/linkedin.svg";
-
+import Youtube from "../../../assets/youtube.svg";
 import FBc from "../../../assets/fbwhite.svg";
 
 type NavLinksProps = {
@@ -59,5 +59,11 @@ export const SocialLinks: NavLinksProps[] = [
     img: LinkedIn,
 
     link: " ",
+  },
+  {
+    title: "Youtube",
+    img: Youtube,
+
+    link: "https://www.youtube.com/@HassanatAttairuMankoFoundation",
   },
 ];
