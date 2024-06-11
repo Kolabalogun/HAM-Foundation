@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Layout from "../components/container/layout";
 import { Link } from "react-router-dom";
 import { News as NewsType } from "../utils/types";
-import { ArrowRightIcon, ClockIcon } from "@heroicons/react/24/solid";
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { Divider } from "@chakra-ui/react";
 
 import useFirestoreCollection from "../hook/useFiretoreCollection";
@@ -24,8 +24,8 @@ const News: React.FC = () => {
   return (
     <Layout bannerTitle="Media1">
       <>
-        <section className="center py-40">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-20  gap-x-10">
+        <section className="center py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-20  gap-x-10">
             {data?.map((article: NewsType) => (
               <div className="flex relative flex-col w-full shadow-lg">
                 <Link to={`/news/${article?.id}`}>
@@ -59,7 +59,7 @@ const News: React.FC = () => {
 
                     <Divider my={6} />
 
-                    <div className="flex text-xs items-center lg:justify-between gap-2">
+                    <div className="flex text-xs items-center  gap-4">
                       <div className="flex items-center ">
                         <p>HAM, {timeAgo(article?.timestamp)}</p>
                       </div>
@@ -75,19 +75,6 @@ const News: React.FC = () => {
                       <div className="flex items-center gap-1">
                         <ChatBubbleOvalLeftIcon className="h-4" />
                         <p>{article?.comments?.length} comments</p>
-                      </div>
-                      <div className="hidden lg:flex">
-                        <Divider
-                          orientation="vertical"
-                          size={"20px"}
-                          height={6}
-                          colorScheme={"#000"}
-                          borderColor={"#000"}
-                        />
-                      </div>
-                      <div className="hidden lg:flex items-center gap-1">
-                        <ClockIcon className="h-4" />
-                        <p>2 mins read</p>
                       </div>
                     </div>
 

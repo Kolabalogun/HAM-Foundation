@@ -7,7 +7,7 @@ const Impact = () => {
   return (
     <section className="text-white font-medium relative impactbg" id="impact">
       <div className="h-full w-full bg-[#000000c4] absolute top-0 left-0 "></div>
-      <div className="center relative py-16 md:py-40   sm:px-10    xl:gap-0 sm:gap-16   ">
+      <div className="center relative py-16 md:py-20   sm:px-10    xl:gap-0 sm:gap-16   ">
         <h1 className="text-center text-[40px] mb-20">Our Impact</h1>
         <div className="grid gap-10 grid-cols-2 xl:grid-cols-4">
           <div className="flex flex-col gap-8 items-center">

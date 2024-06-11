@@ -28,7 +28,7 @@ const Gallery: React.FC = () => {
   return (
     <Layout bannerTitle="Media2">
       <>
-        <section className="center py-40">
+        <section className="center py-20">
           <h1 className="text-4xl mb-10">Photos & Videos</h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">

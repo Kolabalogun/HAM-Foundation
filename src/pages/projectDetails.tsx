@@ -9,8 +9,14 @@ import Loader from "../components/common/loader";
 import useFirestoreCollection from "../hook/useFiretoreCollection";
 import { Divider, Spinner, useToast } from "@chakra-ui/react";
 import timeAgo from "../utils/timeAgo";
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
-import { ChatBubbleOvalLeftIcon, ClockIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowRightIcon,
+  HandThumbUpIcon as HandThumbUpSolid,
+} from "@heroicons/react/24/solid";
+import {
+  ChatBubbleOvalLeftIcon,
+  HandThumbUpIcon,
+} from "@heroicons/react/24/outline";
 import {
   collection,
   doc,
@@ -19,10 +25,13 @@ import {
 } from "firebase/firestore";
 import showToast from "../components/common/Toast";
 import { db } from "../utils/Firebase";
+import { useGlobalContext } from "../context/useGlobalContext";
 
 const ProjectDetails: React.FC = () => {
   const { id } = useParams();
   const toast = useToast();
+
+  const { projectsLike, setProjectsLike } = useGlobalContext();
 
   const [form, setform] = useState<Project | null>(null);
 
@@ -108,13 +117,72 @@ const ProjectDetails: React.FC = () => {
     }
   };
 
+  const submitLike = async () => {
+    if (form) {
+      const like = form?.likes || 0;
+
+      const collectionRef = collection(db, "pastprojects");
+      const docRef = doc(collectionRef, id);
+
+      try {
+        // Update the document in Firestore
+
+        if (id && projectsLike?.includes(id)) {
+          if (form?.likes !== 0) {
+            await updateDoc(docRef, {
+              ...form,
+              likes: like - 1,
+              updatedAt: serverTimestamp(),
+            });
+
+            const filteredprojectsLikes = projectsLike?.filter(
+              (like) => like !== id
+            );
+
+            localStorage.setItem(
+              "HamFoundationProjects",
+              JSON.stringify(filteredprojectsLikes)
+            );
+
+            setProjectsLike(filteredprojectsLikes);
+          }
+        } else {
+          await updateDoc(docRef, {
+            ...form,
+            likes: like + 1,
+            updatedAt: serverTimestamp(),
+          });
+
+          // const updatedprojectsLikes = [...(projectsLike || []), id];
+
+          const updatedprojectsLikes = [...(projectsLike || []), id].filter(
+            (like): like is string => like !== undefined
+          );
+
+          localStorage.setItem(
+            "HamFoundationProjects",
+            JSON.stringify(updatedprojectsLikes)
+          );
+
+          setProjectsLike(updatedprojectsLikes);
+        }
+
+        getPageContentDetail();
+      } catch (error) {
+        1;
+        console.log(error);
+        showToast(toast, "error", "error", "Error liking post");
+      }
+    }
+  };
+
   if (loading || !form) return <Loader />;
 
   return (
     <Layout bannerTitle="Projects">
       <>
-        <section className="center py-40">
-          <div className="flex gap-10 lg:gap-20 flex-col lg:flex-row">
+        <section className="center py-20">
+          <div className="flex gap-10 lg:gap-20 flex-col xl:flex-row">
             <div style={{ flex: 2 }}>
               <div className="">
                 <div className="cursor-pointer">
@@ -141,7 +209,7 @@ const ProjectDetails: React.FC = () => {
                       <ChatBubbleOvalLeftIcon className="h-4" />
                       <p>{form?.comments?.length || 0} comments</p>
                     </div>
-                    <div className="hidden lg:flex">
+                    <div className=" flex">
                       <Divider
                         orientation="vertical"
                         size={"20px"}
@@ -150,10 +218,18 @@ const ProjectDetails: React.FC = () => {
                         borderColor={"#000"}
                       />
                     </div>
-                    <div className="hidden lg:flex items-center gap-1">
-                      <ClockIcon className="h-4" />
-                      <p>2 mins read</p>
-                    </div>
+                    <button
+                      onClick={submitLike}
+                      className=" flex cursor-pointer items-center gap-1"
+                    >
+                      {id && projectsLike?.includes(id) ? (
+                        <HandThumbUpSolid color="#ff6500" className="h-4" />
+                      ) : (
+                        <HandThumbUpIcon className="h-4" />
+                      )}
+                      {(form?.likes || form?.likes !== 0) &&
+                        ` ${form?.likes || 0} like(s)`}
+                    </button>
                   </div>
                 </div>
 
@@ -250,7 +326,7 @@ const ProjectDetails: React.FC = () => {
 
                                 <Divider my={6} />
 
-                                <div className="flex text-xs items-center justify-between gap-2">
+                                <div className="flex text-xs gap-4">
                                   <div className="flex items-center ">
                                     <p>HAM, {timeAgo(article?.timestamp)}</p>
                                   </div>
@@ -266,17 +342,6 @@ const ProjectDetails: React.FC = () => {
                                     <p>
                                       {article?.comments?.length || 0} comments
                                     </p>
-                                  </div>
-                                  <Divider
-                                    orientation="vertical"
-                                    size={"20px"}
-                                    height={6}
-                                    colorScheme={"#000"}
-                                    borderColor={"#000"}
-                                  />
-                                  <div className="flex items-center gap-1">
-                                    <ClockIcon className="h-4" />
-                                    <p>2 mins read</p>
                                   </div>
                                 </div>
 

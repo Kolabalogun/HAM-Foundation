@@ -41,6 +41,7 @@ const Home: React.FC = () => {
     <>
       <MembershipModal onClose={onClose} isOpen={isOpen} />
       <PartnershipModal onClose={partnerOnClose} isOpen={partnerIsOpen} />
+
       <main>
         <Hero onOpen={onOpen} partnerOnOpen={partnerOnOpen} />
         <Roles />

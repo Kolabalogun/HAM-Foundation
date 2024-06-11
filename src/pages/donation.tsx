@@ -17,7 +17,7 @@ const Donation = () => {
   return (
     <Layout bannerTitle="Donation">
       <>
-        <section className="center py-40">
+        <section className="center py-20">
           <div className="grid gap-16 xl:gap-0 xl:grid-cols-2">
             <div>
               <div className="">

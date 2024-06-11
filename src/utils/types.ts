@@ -63,6 +63,7 @@ export type Project = {
   description: string;
   comments: CommenType[];
   timestamp: Timestamp;
+  likes?: number;
 };
 
 export type Members = {
@@ -81,6 +82,7 @@ export type News = {
   timestamp: Timestamp;
   paragraphOne: string;
   comments: CommenType[];
+  likes?: number;
 };
 
 export type CommenType = {

@@ -8,7 +8,7 @@ type ProjectType = {
 
 const Projects: React.FC<ProjectType> = ({ projects }) => {
   return (
-    <section className="center py-20 sm:py-40 text-white   xl:gap-10  px-5 sm:px-10 ">
+    <section className="center py-20 sm:py-20 text-white   xl:gap-10  px-5 sm:px-10 ">
       <div className=" ">
         <div className="text-center mb-20">
           <p className="text-secondary mb-5 font-medium text-xl">#projects</p>

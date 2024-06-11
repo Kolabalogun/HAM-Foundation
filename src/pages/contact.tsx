@@ -106,7 +106,7 @@ const Contact: React.FC = () => {
   return (
     <Layout bannerTitle="Contact">
       <>
-        <section className="center py-40">
+        <section className="center py-20">
           <div className=" mb-24">
             <div className="">
               <p className="  text-4xl text-center  font-semibold">

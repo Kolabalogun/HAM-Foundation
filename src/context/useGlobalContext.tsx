@@ -13,6 +13,10 @@ interface AppContextProps {
   setloading: React.Dispatch<React.SetStateAction<boolean>>;
   pageType: string;
   setpageType: React.Dispatch<React.SetStateAction<PageTye>>;
+  newsLike: string[];
+  setNewsLike: React.Dispatch<React.SetStateAction<string[]>>;
+  projectsLike: string[];
+  setProjectsLike: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -28,11 +32,21 @@ const AppProvider: FC<AppProviderProps> = ({ children }) => {
   // page type
   const [pageType, setpageType] = useState<PageTye>(PageTye.home);
 
-  // get projects from firestore
+  // Function to safely parse JSON from localStorage
+  const safeParse = (key: string): string[] => {
+    const storedValue = localStorage.getItem(key);
+    return storedValue ? JSON.parse(storedValue) : [];
+  };
 
-  // if (loading || eventsLoader || articlesLoader) {
-  //   return <Loader />;
-  // }
+  // news likes from local storage
+  const [newsLike, setNewsLike] = useState<string[]>(
+    safeParse("HamFoundationNews")
+  );
+
+  // projects likes from local storage
+  const [projectsLike, setProjectsLike] = useState<string[]>(
+    safeParse("HamFoundationProjects")
+  );
 
   return (
     <AppContext.Provider
@@ -41,6 +55,10 @@ const AppProvider: FC<AppProviderProps> = ({ children }) => {
         setloading,
         pageType,
         setpageType,
+        newsLike,
+        setNewsLike,
+        projectsLike,
+        setProjectsLike,
       }}
     >
       {children}
