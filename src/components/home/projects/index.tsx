@@ -29,7 +29,16 @@ const Projects: React.FC<ProjectType> = ({ projects }) => {
                   <div className="">
                     <p className="font-semibold text-2xl">{event?.name}</p>
                     <div className="flex gap-4   mt-5 text-sm">
-                      <span>{event?.date}</span>
+                      <span>
+                        {" "}
+                        {event &&
+                          event?.date &&
+                          event?.date?.toDate()?.toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                      </span>
                     </div>
                   </div>
                 </div>
