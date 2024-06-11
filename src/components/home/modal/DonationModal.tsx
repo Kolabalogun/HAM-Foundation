@@ -12,7 +12,9 @@ import { useState, useEffect } from "react";
 import showToast from "../../common/Toast";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../../../utils/Firebase";
-import NaijaStates from "naija-state-local-government";
+import * as NigerianStates from "nigerian-states-and-lgas";
+
+// other code remains unchanged
 
 type DonationType = {
   onClose: () => void;
@@ -57,16 +59,17 @@ const DonationModal: React.FC<DonationType> = ({ onClose, isOpen }) => {
   // Fetch LGAs when state changes
   useEffect(() => {
     if (state) {
-      const statee = NaijaStates.lgas(state);
-
-      setLgas(statee?.lgas);
+      const stateData = NigerianStates.lgas(state);
+      setLgas(stateData || []);
     } else {
       setLgas([]);
     }
   }, [state]);
 
   // Function to handle form submission
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
     if (name && email && state && phoneNumber && typeOfDonation && lga) {
       setLoading(true);
 
@@ -78,13 +81,14 @@ const DonationModal: React.FC<DonationType> = ({ onClose, isOpen }) => {
         showToast(toast, "HAM.", "success", "Received form submission");
         setForm(initialState);
         setLoading(false);
+        onClose();
       } catch (error) {
         console.log(error);
         showToast(toast, "HAM.", "error", "Form submission failed");
         setLoading(false);
       }
     } else {
-      return showToast(toast, "HAM.", "error", "Please fill all fields");
+      showToast(toast, "HAM.", "error", "Please fill all fields");
     }
   };
 
@@ -158,7 +162,7 @@ const DonationModal: React.FC<DonationType> = ({ onClose, isOpen }) => {
               {/* Input field for type of donation */}
               <div className="flex flex-col">
                 <select
-                  id="lga"
+                  id="typeOfDonation"
                   placeholder="Select Type Of Donation"
                   className="bg-inherit border-[#acacac] p-3 border-2 outline-none"
                   value={typeOfDonation}
@@ -172,7 +176,7 @@ const DonationModal: React.FC<DonationType> = ({ onClose, isOpen }) => {
                   <option key="" value="">
                     Select Type Of Donation
                   </option>
-                  {typeOfDonations?.map((type) => (
+                  {typeOfDonations.map((type) => (
                     <option key={type} value={type}>
                       {type}
                     </option>
@@ -183,7 +187,6 @@ const DonationModal: React.FC<DonationType> = ({ onClose, isOpen }) => {
               <div className="flex flex-col">
                 <select
                   id="state"
-                  defaultValue={"Select State"}
                   placeholder="Select State"
                   className="bg-inherit border-[#acacac] p-3 border-2 outline-none"
                   value={state}
@@ -197,7 +200,7 @@ const DonationModal: React.FC<DonationType> = ({ onClose, isOpen }) => {
                   <option key="" value="">
                     Select State
                   </option>
-                  {NaijaStates?.states()?.map((stateName: string) => (
+                  {NigerianStates.states().map((stateName: string) => (
                     <option key={stateName} value={stateName}>
                       {stateName}
                     </option>
@@ -222,7 +225,7 @@ const DonationModal: React.FC<DonationType> = ({ onClose, isOpen }) => {
                     <option key="" value="">
                       Select LGA
                     </option>
-                    {lgas?.map((lgaName) => (
+                    {lgas.map((lgaName) => (
                       <option key={lgaName} value={lgaName}>
                         {lgaName}
                       </option>
