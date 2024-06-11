@@ -305,7 +305,15 @@ const ProjectDetails: React.FC = () => {
                             <div className=" ">
                               <div className="  p-[15px] py-[50px]">
                                 <div className="text-white absolute bg-secondary  text-base font-medium  p-4 right-4 -top-5  ">
-                                  {article?.date}
+                                  {article &&
+                                    article?.date &&
+                                    article?.date
+                                      ?.toDate()
+                                      ?.toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                      })}
                                 </div>
                                 <Link
                                   to={`/news/${article?.id}`}

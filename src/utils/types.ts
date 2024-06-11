@@ -58,7 +58,7 @@ export type About = {
 export type Project = {
   id: string;
   name: string;
-  date: string;
+  date: Timestamp;
   mainImg: string;
   description: string;
   comments: CommenType[];
@@ -70,14 +70,14 @@ export type Members = {
   id: string;
   name: string;
   role: string;
-  date: string;
+  date: string | Timestamp;
   imageUrl: string;
   description: string;
 };
 export type News = {
   id: string;
   title: string;
-  date: string;
+  date: Timestamp;
   mainImg: string;
   timestamp: Timestamp;
   paragraphOne: string;
