@@ -10,6 +10,7 @@ import OurTeam from "../pages/ourteam";
 import News from "../pages/news";
 import Gallery from "../pages/gallery";
 import ProjectDetails from "../pages/projectDetails";
+import NotFound from "../pages/not-found";
 
 export const HOME_ROUTE = "/";
 export const WHO_ARE_WE_ROUTE = "/who-are-we";
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: CONTACT_ROUTE,
     element: <Contact />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

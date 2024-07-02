@@ -3,7 +3,7 @@ import React from "react";
 
 const Milestones: React.FC = () => {
   return (
-    <section className="center pb-44  hidden lg:block  sm:px-10 ">
+    <section className="center pb-44  hidden lg:block sm:mx-10  sm:px-10 ">
       <h1 className="text-[#262626] text-center  text-[38px]    font-semibold mb-64">
         Our Milestones
       </h1>

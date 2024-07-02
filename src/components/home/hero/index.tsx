@@ -19,7 +19,7 @@ const Hero: React.FC<HeroType> = ({ onOpen, partnerOnOpen }) => {
 
         <div className="relative px-5 sm:px-10   h-full flex flex-col justify-center center">
           <div className="flex flex-col gap-4 md:gap-0">
-            <h1 className=" text-[43px] md:text-[59px] md:font-bold font-semibold   md:leading-[85px]  ">
+            <h1 className=" text-[42px] md:text-[59px] md:font-bold font-semibold   md:leading-[85px]  ">
               Empowering Communities,
               <br />
               Transforming Lives.

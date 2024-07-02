@@ -192,20 +192,24 @@ const BlogDetails: React.FC = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="  my-10">
-                  <h1 className=" text-4xl font-semibold  ">{form?.title}</h1>
+                <div className="    my-10">
+                  <h1 className=" text-3xl sm:text-4xl font-semibold  ">
+                    {form?.title}
+                  </h1>
                   <div className="flex text-xs items-center   gap-2 mt-3">
                     <div className="flex items-center ">
                       <p>HAM, {timeAgo(form?.timestamp)}</p>
                     </div>
-                    <Divider
-                      orientation="vertical"
-                      size={"20px"}
-                      height={6}
-                      colorScheme={"#000"}
-                      borderColor={"#000"}
-                    />
-                    <div className="flex items-center gap-1">
+                    <div className=" hidden sm:flex">
+                      <Divider
+                        orientation="vertical"
+                        size={"20px"}
+                        height={6}
+                        colorScheme={"#000"}
+                        borderColor={"#000"}
+                      />
+                    </div>
+                    <div className="hidden sm:flex items-center gap-1">
                       <ChatBubbleOvalLeftIcon className="h-4" />
                       <p>{form?.comments?.length || 0} comments</p>
                     </div>
@@ -233,7 +237,7 @@ const BlogDetails: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="my-24">
+                <div className="  mb-24  mt-7">
                   <p
                     className="text-sm font-medium leading-6"
                     dangerouslySetInnerHTML={{
@@ -287,7 +291,7 @@ const BlogDetails: React.FC = () => {
                     <Spinner />
                   </div>
                 ) : (
-                  <div className="">
+                  <div className="gap-y-5">
                     {data?.slice(0, 3).map((article: News) => {
                       if (article?.id !== id) {
                         return (
@@ -353,7 +357,7 @@ const BlogDetails: React.FC = () => {
                                   </div>
                                 </div>
 
-                                <Link to={`/article/${article.id}`}>
+                                <Link to={`/news/${article?.id}`}>
                                   <div className="flex gap-2 items-center text-primary text-sm mt-6 cursor-pointer font-medium ">
                                     <p>Read Now</p>
                                     <ArrowRightIcon className="h-5 font-medium" />

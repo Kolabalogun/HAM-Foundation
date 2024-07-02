@@ -68,6 +68,16 @@ const MembershipModal: React.FC<MembershipType> = ({ onClose, isOpen }) => {
     }
   };
 
+  const fois = [
+    "Education",
+    "Digital Economy and Innovation",
+    "Agriculture & Food Security",
+    "Health & Wellbeing",
+    "Partnership",
+    "Impact, Discipline, and Evaluation",
+    "Advocacy",
+  ];
+
   // Return the JSX structure of the MembershipModal component
   return (
     <Modal
@@ -136,11 +146,11 @@ const MembershipModal: React.FC<MembershipType> = ({ onClose, isOpen }) => {
                   }
                 />
               </div>
-              <div className="flex flex-col ">
-                <input
-                  id="name"
+              <div className="flex flex-col">
+                <select
+                  id="foi"
                   placeholder=" Field Of Interest"
-                  className="bg-inherit border-[#acacac] p-3   border-2 outline-none"
+                  className="bg-inherit border-[#acacac] p-3 border-2 outline-none"
                   value={fieldOfIntrest}
                   onChange={(e) =>
                     setForm({
@@ -148,8 +158,18 @@ const MembershipModal: React.FC<MembershipType> = ({ onClose, isOpen }) => {
                       fieldOfIntrest: e.target.value,
                     })
                   }
-                />
+                >
+                  <option key="" value="">
+                    Select Field of Interest
+                  </option>
+                  {fois.map((foi) => (
+                    <option key={foi} value={foi}>
+                      {foi}
+                    </option>
+                  ))}
+                </select>
               </div>
+
               <div className="flex flex-col ">
                 <textarea
                   id="name"

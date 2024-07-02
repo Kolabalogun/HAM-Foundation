@@ -85,7 +85,7 @@ const News: React.FC = () => {
                       </div>
                     </div>
 
-                    <Link to={`/article/${article.id}`}>
+                    <Link to={`/news/${article?.id}`}>
                       <div className="flex gap-2 items-center text-primary text-sm mt-6 cursor-pointer font-medium ">
                         <p>Read Now</p>
                         <ArrowRightIcon className="h-5 font-medium" />

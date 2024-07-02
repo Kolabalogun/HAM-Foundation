@@ -8,7 +8,7 @@ type ProjectType = {
 
 const Projects: React.FC<ProjectType> = ({ projects }) => {
   return (
-    <section className="center py-20 sm:py-20 text-white   xl:gap-10  px-5 sm:px-10 ">
+    <section className="center py-20 sm:py-20 text-white   xl:gap-10   px-5 sm:px-10 ">
       <div className=" ">
         <div className="text-center mb-20">
           <p className="text-secondary mb-5 font-medium text-xl">#projects</p>
@@ -17,12 +17,12 @@ const Projects: React.FC<ProjectType> = ({ projects }) => {
           </h1>
         </div>
 
-        <div className="my-10 flex items-center flex-col lg:flex-row lg:overflow-x-scroll    gap-9">
+        <div className="m-10  flex items-center flex-col lg:flex-row lg:overflow-x-scroll    gap-9">
           {projects?.map((event: Project) => (
             <Link className=" " key={event?.id} to={`/projects/${event.id}`}>
               <div
                 className="flex flex-col justify-end    bg-cover px-8 py-10 bg-center relative h-[500px] w-[350px]  "
-                style={{ backgroundImage: `url(${event.mainImg})` }}
+                style={{ backgroundImage: `url(${event?.mainImg})` }}
               >
                 <div className="h-full w-full bg-gradient-to-b from-[#ffffff36] via-[#58282ab2] to-black absolute top-0 left-0 "></div>
                 <div className="flex gap-3 relative z-40 flex-col">

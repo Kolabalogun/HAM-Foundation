@@ -10,9 +10,9 @@ type MembershipType = {
 
 const Membership: React.FC<MembershipType> = ({ onOpen }) => {
   return (
-    <section className="center py-20   px-5 sm:px-10 ">
+    <section className="center py-5 pb-20 sm:py-32   px-5 sm:px-10 ">
       <div className="">
-        <h1 className="text-[#262626]  text-[38px]    font-semibold mb-14">
+        <h1 className="text-[#262626]  text-[38px]    font-semibold mb-8 sm:mb-14">
           Our Membership
         </h1>
         <div className="xl:grid-cols-2 grid grid-cols-1 xl:gap-10 gap-[100px]">
