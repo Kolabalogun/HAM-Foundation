@@ -3,12 +3,12 @@ import React from "react";
 
 const Milestones: React.FC = () => {
   return (
-    <section className="center pb-44  hidden lg:block sm:mx-10  sm:px-10 ">
+    <section className="center pb-44  hidden lg:block  sm:px-10 ">
       <h1 className="text-[#262626] text-center  text-[38px]    font-semibold mb-64">
         Our Milestones
       </h1>
 
-      <div className=" font-medium">
+      <div className=" font-medium sm:mx-10">
         <div className=" relative  h-1 bg-black w-full ">
           <div className="absolute -left-10 -translate-y-full rotate-180 top-2 flex items-center flex-col">
             <div className="p-2 rounded-full bg-black"></div>
