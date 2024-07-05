@@ -11,6 +11,7 @@ import News from "../pages/news";
 import Gallery from "../pages/gallery";
 import ProjectDetails from "../pages/projectDetails";
 import NotFound from "../pages/not-found";
+import Admin from "../pages/admin";
 
 export const HOME_ROUTE = "/";
 export const WHO_ARE_WE_ROUTE = "/who-are-we";
@@ -21,6 +22,8 @@ export const PROJECT_DETAILS_ROUTE = "/projects/:id";
 export const GALLERY_ROUTE = "/gallery";
 export const DONATION_ROUTE = "/donations";
 export const CONTACT_ROUTE = "/contact-us";
+
+export const ADMIN_ROUTE = "/admin";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: CONTACT_ROUTE,
     element: <Contact />,
+  },
+  {
+    path: ADMIN_ROUTE,
+    element: <Admin />,
   },
   {
     path: "*",
