@@ -47,6 +47,21 @@ const BlogDetails: React.FC = () => {
     setdateId(dateId);
   };
 
+  const { data: allNews } = useFirestoreCollection<News>("news");
+
+  const [currentIndexx, setCurrentIndex] = useState<number>(0);
+
+  const findCurrentNewsIndexInAllNewsArray = () => {
+    const currentIndex = allNews.findIndex((news) => news.id === id);
+
+    setCurrentIndex(currentIndex);
+    return currentIndex;
+  };
+
+  useEffect(() => {
+    findCurrentNewsIndexInAllNewsArray();
+  }, [allNews, id]);
+
   const getPageContentDetail = async (noReload?: boolean) => {
     noReload && setloading(true);
     const data = await fetchFirestoreData("news", id);
@@ -273,7 +288,7 @@ const BlogDetails: React.FC = () => {
               <Divider my={5} />
               <div className=""></div>
             </div>
-            {data?.length > 1 && (
+            {data?.length > 1 && currentIndexx !== data.length - 1 && (
               <div className="">
                 <Divider
                   orientation="vertical"
@@ -284,7 +299,7 @@ const BlogDetails: React.FC = () => {
                 />
               </div>
             )}
-            {data?.length > 1 && (
+            {data?.length > 1 && currentIndexx !== data.length - 1 && (
               <div className="flex-1 flex flex-row xl:flex-col gap-10">
                 {loader ? (
                   <div className="flex h-full justify-center items-center">
@@ -292,83 +307,86 @@ const BlogDetails: React.FC = () => {
                   </div>
                 ) : (
                   <div className="gap-y-5">
-                    {data?.slice(0, 3).map((article: News) => {
-                      if (article?.id !== id) {
-                        return (
-                          <div className="flex relative flex-col w-full shadow-lg">
-                            <Link to={`/news/${article?.id}`}>
-                              <div className="cursor-pointer   h-[300px]   ">
-                                <img
-                                  src={article?.mainImg}
-                                  alt="blogImg"
-                                  className="object-cover w-full h-full"
-                                />
-                              </div>
-                            </Link>
-
-                            <div className=" ">
-                              <div className="  p-[15px] py-[50px]">
-                                <div className="text-white absolute bg-secondary  text-base font-medium  p-4 right-4 -top-5  ">
-                                  {article &&
-                                    article?.date &&
-                                    article?.date
-                                      ?.toDate()
-                                      ?.toLocaleDateString("en-US", {
-                                        year: "numeric",
-                                        month: "long",
-                                        day: "numeric",
-                                      })}
-                                </div>
-                                <Link
-                                  to={`/news/${article?.id}`}
-                                  className="text-black uppercase text-[16px]  font-semibold mb-[15px] "
-                                >
-                                  {article?.title}
-                                </Link>
-
-                                <p
-                                  className="mt-4 text-black "
-                                  dangerouslySetInnerHTML={{
-                                    __html: `${article?.paragraphOne.substring(
-                                      0,
-                                      200
-                                    )}...`,
-                                  }}
-                                />
-
-                                <Divider my={6} />
-
-                                <div className="flex text-xs items-center gap-4">
-                                  <div className="flex items-center ">
-                                    <p>HAM, {timeAgo(article?.timestamp)}</p>
-                                  </div>
-                                  <Divider
-                                    orientation="vertical"
-                                    size={"20px"}
-                                    height={6}
-                                    colorScheme={"#000"}
-                                    borderColor={"#000"}
+                    {data
+                      ?.slice(currentIndexx, currentIndexx + 3)
+                      .map((article: News) => {
+                        if (article?.id !== id) {
+                          return (
+                            <div className="flex relative flex-col w-full shadow-lg">
+                              <Link to={`/news/${article?.id}`}>
+                                <div className="cursor-pointer   h-[300px]   ">
+                                  <img
+                                    src={article?.mainImg}
+                                    alt="blogImg"
+                                    className="object-cover w-full h-full"
                                   />
-                                  <div className="flex items-center gap-1">
-                                    <ChatBubbleOvalLeftIcon className="h-4" />
-                                    <p>
-                                      {article?.comments?.length || 0} comments
-                                    </p>
-                                  </div>
                                 </div>
+                              </Link>
 
-                                <Link to={`/news/${article?.id}`}>
-                                  <div className="flex gap-2 items-center text-primary text-sm mt-6 cursor-pointer font-medium ">
-                                    <p>Read Now</p>
-                                    <ArrowRightIcon className="h-5 font-medium" />
+                              <div className=" ">
+                                <div className="  p-[15px] py-[50px]">
+                                  <div className="text-white absolute bg-secondary  text-base font-medium  p-4 right-4 -top-5  ">
+                                    {article &&
+                                      article?.date &&
+                                      article?.date
+                                        ?.toDate()
+                                        ?.toLocaleDateString("en-US", {
+                                          year: "numeric",
+                                          month: "long",
+                                          day: "numeric",
+                                        })}
                                   </div>
-                                </Link>
+                                  <Link
+                                    to={`/news/${article?.id}`}
+                                    className="text-black uppercase text-[16px]  font-semibold mb-[15px] "
+                                  >
+                                    {article?.title}
+                                  </Link>
+
+                                  <p
+                                    className="mt-4 text-black "
+                                    dangerouslySetInnerHTML={{
+                                      __html: `${article?.paragraphOne.substring(
+                                        0,
+                                        200
+                                      )}...`,
+                                    }}
+                                  />
+
+                                  <Divider my={6} />
+
+                                  <div className="flex text-xs items-center gap-4">
+                                    <div className="flex items-center ">
+                                      <p>HAM, {timeAgo(article?.timestamp)}</p>
+                                    </div>
+                                    <Divider
+                                      orientation="vertical"
+                                      size={"20px"}
+                                      height={6}
+                                      colorScheme={"#000"}
+                                      borderColor={"#000"}
+                                    />
+                                    <div className="flex items-center gap-1">
+                                      <ChatBubbleOvalLeftIcon className="h-4" />
+                                      <p>
+                                        {article?.comments?.length || 0}{" "}
+                                        comments
+                                      </p>
+                                    </div>
+                                  </div>
+
+                                  <Link to={`/news/${article?.id}`}>
+                                    <div className="flex gap-2 items-center text-primary text-sm mt-6 cursor-pointer font-medium ">
+                                      <p>Read Now</p>
+                                      <ArrowRightIcon className="h-5 font-medium" />
+                                    </div>
+                                  </Link>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        );
-                      }
-                    })}
+                          );
+                        }
+                      })}
                   </div>
                 )}
               </div>

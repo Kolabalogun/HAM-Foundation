@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
-import { SocialLinks } from "./links";
+
 import Logo from "../../../assets/flogo.png";
 import phone from "../../../assets/phone-solid.svg";
 import mail from "../../../assets/envelope-solid.svg";
 import location from "../../../assets/location-dot-solid.svg";
+
+import Twitter from "../../../assets/twitter.svg";
+import Instagram from "../../../assets/instagram.svg";
+
+import LinkedIn from "../../../assets/linkedin.svg";
+import Youtube from "../../../assets/youtube.svg";
+import FBc from "../../../assets/fbwhite.svg";
 
 import {
   CONTACT_ROUTE,
@@ -12,9 +19,18 @@ import {
   OUR_TEAM_ROUTE,
   WHO_ARE_WE_ROUTE,
 } from "../../../router";
-import { NavLinksProps } from "../header";
 
+import { useGlobalContext } from "../../../context/useGlobalContext";
+
+type NavLinksProps = {
+  title: string;
+  link: string;
+  img?: string;
+  img2?: string;
+  date?: string;
+};
 const Footer = () => {
+  const { contactInfo } = useGlobalContext();
   const NavLinks: NavLinksProps[] = [
     {
       title: "Who are we",
@@ -31,6 +47,34 @@ const Footer = () => {
     {
       title: "Contact Us",
       link: CONTACT_ROUTE,
+    },
+  ];
+
+  const SocialLinks: NavLinksProps[] = [
+    {
+      title: "Twitter",
+      img: Twitter,
+      link: contactInfo?.footerTwitterLink,
+    },
+    {
+      title: "Instagram",
+      img: Instagram,
+      link: contactInfo?.footerInstagramLink,
+    },
+    {
+      title: "Facebook",
+      img: FBc,
+      link: contactInfo?.footerFacebookLink,
+    },
+    {
+      title: "LinkedIn",
+      img: LinkedIn,
+      link: contactInfo?.footerLinkedInLink,
+    },
+    {
+      title: "Youtube",
+      img: Youtube,
+      link: contactInfo?.footerYoutubeLink,
     },
   ];
 
@@ -71,20 +115,24 @@ const Footer = () => {
               <img src={location} alt="" className="h-4" />
               <p className="text-sm ">
                 {
-                  "Maayoit Healthcare Complex, Opp. GSS, old Jebba Rd, Iilorin Kwara State"
+                  "Maayoit Healthcare Complex, Opp. GSS, Old Jebba Roadd, Ilorin Kwara State"
                 }
               </p>
             </div>
-            <a href="/" className="flex items-center gap-5">
+
+            <a
+              href={`tel:+${contactInfo?.contactPhone}`}
+              className="flex items-center gap-5"
+            >
               <img src={phone} alt="" className="h-4" />
-              <p className="text-sm ">{"+1 234 5677 890"}</p>
+              <p className="text-sm ">{contactInfo.contactPhone}</p>
             </a>
             <a
-              href="mailto:jafoundationosun@gmail.com"
+              href={`mailto:${contactInfo?.contactEmail}`}
               className="flex items-center gap-5"
             >
               <img src={mail} alt="" className="h-4" />
-              <p className="text-sm ">hamfoundation001@gmail.com</p>
+              <p className="text-sm ">{contactInfo?.contactEmail}</p>
             </a>
           </div>
         </div>

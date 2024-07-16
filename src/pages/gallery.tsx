@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/container/layout";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import useFirestoreCollection from "../hook/useFiretoreCollection";
@@ -14,6 +14,8 @@ type VideoDataType = {
 type ImageType = {
   imageUrl: string;
   name: string;
+  imageUrlI: string;
+  imageUrlII: string;
 };
 
 const Gallery: React.FC = () => {
@@ -21,6 +23,16 @@ const Gallery: React.FC = () => {
     useFirestoreCollection<VideoDataType>("youtubeVideos");
 
   const { data: images, loader } = useFirestoreCollection<ImageType>("images");
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const handleImageClick = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const handleCloseClick = () => {
+    setSelectedImage(null);
+  };
 
   if (loading || loader) {
     return <Loader />;
@@ -32,7 +44,7 @@ const Gallery: React.FC = () => {
           <h1 className="text-4xl mb-10">Photos & Videos</h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {data?.map((project: VideoDataType, idx) => (
+            {data?.slice(0, 3)?.map((project: VideoDataType, idx) => (
               <div key={idx} className=" mb-16">
                 <iframe
                   width="100%"
@@ -65,16 +77,58 @@ const Gallery: React.FC = () => {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-32">
+          <div className="mt-32">
             {images?.map((project: ImageType, idx) => (
-              <div key={idx} className=" w-full  h-96">
-                <img
-                  src={project.imageUrl}
-                  alt={project.name}
-                  className="object-cover h-full"
-                />
+              <div className="mt-16" key={idx}>
+                <p className="mb-10 text-3xl font-semibold  ">
+                  {project?.name}{" "}
+                </p>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-10  ">
+                  <div className="w-full h-96">
+                    <img
+                      src={project.imageUrl}
+                      alt={project.name}
+                      className="object-cover h-full cursor-pointer"
+                      onClick={() => handleImageClick(project.imageUrl)}
+                    />
+                  </div>
+                  <div className="w-full h-96">
+                    <img
+                      src={project.imageUrlI}
+                      alt={project.name}
+                      className="object-cover h-full cursor-pointer"
+                      onClick={() => handleImageClick(project.imageUrlI)}
+                    />
+                  </div>{" "}
+                  <div className="w-full h-96">
+                    <img
+                      src={project.imageUrlII}
+                      alt={project.name}
+                      className="object-cover h-full cursor-pointer"
+                      onClick={() => handleImageClick(project.imageUrlII)}
+                    />
+                  </div>
+                </div>
               </div>
             ))}
+
+            <div className=" ">
+              {selectedImage && (
+                <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
+                  <button
+                    className="absolute top-4 right-4 text-white text-2xl"
+                    onClick={handleCloseClick}
+                  >
+                    &times;
+                  </button>
+                  <img
+                    src={selectedImage}
+                    alt="Full View"
+                    className="max-w-full max-h-full"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </section>
       </>

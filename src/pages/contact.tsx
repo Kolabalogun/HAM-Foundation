@@ -6,22 +6,23 @@ import Layout from "../components/container/layout";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { PageTye, useGlobalContext } from "../context/useGlobalContext";
-// import emailjs from "@emailjs/browser";
+import emailjs from "@emailjs/browser";
 import { BuildingOffice2Icon } from "@heroicons/react/24/solid";
 import {
   ClockIcon,
   EnvelopeIcon,
   PhoneIcon,
 } from "@heroicons/react/24/outline";
+import { toast } from "react-toastify";
 
-// type Formd = {
-//   firstName: string;
-//   message: string;
-//   email: string;
-// };
+type Formd = {
+  firstName: string;
+  message: string;
+  email: string;
+};
 
 const Contact: React.FC = () => {
-  const { setpageType } = useGlobalContext();
+  const { setpageType, contactInfo } = useGlobalContext();
 
   const [isAboveMediumScreens, setIsAboveMediumScreens] = useState<boolean>(
     window.innerWidth >= 1060
@@ -46,6 +47,8 @@ const Contact: React.FC = () => {
     setpageType(PageTye.contact);
   }, []);
 
+  const [loading, setLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -68,40 +71,42 @@ const Contact: React.FC = () => {
         .required("Please enter your phone number"),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      // sendEmail(values);
+      // alert(JSON.stringify(values, null, 2));
+      sendEmail(values);
     },
   });
 
-  // const sendEmail = (values: Formd) => {
-  //   const { firstName, message, email } = values;
+  const sendEmail = (values: Formd) => {
+    const { firstName, message, email, phone } = values;
 
-  //   // let from_name = firstName;
+    setLoading(true);
 
-  //   emailjs
-  //     .send(
-  //       "service_ouihur7",
-  //       "template_005z03r",
-  //       {
-  //         email,
-  //         from_name: firstName,
-  //         message,
-  //       },
-  //       "93PBOefoL8el5j8ds"
-  //     )
-  //     .then(
-  //       function (response) {
-  //         console.log("SUCCESS!", response.status, response.text);
-  //         console.log("Email Sent");
-  //         toast.success("Email Sent Successfully!");
-  //       },
-  //       function (error) {
-  //         console.log("FAILED...", error);
-  //         console.log("Email Failed!");
-  //         toast.error("Email Fail to send. Try again later");
-  //       }
-  //     );
-  // };
+    emailjs
+      .send(
+        "service_chenl7r",
+        "template_73wmvqe",
+        {
+          email,
+          from_name: firstName,
+          phone: phone,
+          message,
+        },
+        "iFthpcfM2-hGNnZIk"
+      )
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+          setLoading(false);
+          toast.success("Email Sent Successfully!");
+          formik.resetForm();
+        },
+        function (error) {
+          console.log("FAILED...", error);
+          setLoading(false);
+          toast.error("Email Fail to send. Try again later");
+        }
+      );
+  };
 
   return (
     <Layout bannerTitle="Contact">
@@ -128,14 +133,14 @@ const Contact: React.FC = () => {
                 <PhoneIcon className="h-16" />
 
                 <p className="text-base font-medium">Phone Number</p>
-                <p>+2348032425386 </p>
-                <p>+2348032425386</p>
+                <p>{contactInfo.contactPhone}</p>
+                <p>{contactInfo.contactPhone2}</p>
               </div>
               <div className="flex flex-col items-center text-white text-center p-6   bg-[#c54e02] gap-4 ">
                 <EnvelopeIcon className="h-16" />
 
                 <p className="text-base font-medium">Email Address</p>
-                <p> hamfoundation001@gmail.com</p>
+                <p>{contactInfo?.contactEmail}</p>
               </div>
               <div className="flex flex-col items-center text-white text-center p-6 lg:rounded-r-xl  bg-primary gap-4 ">
                 <ClockIcon className="h-16" />
@@ -151,7 +156,7 @@ const Contact: React.FC = () => {
           <div className="grid gap-16 xl:gap-0 xl:grid-cols-2">
             <div className="">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.001801450312!2d4.570850411634764!3d8.49920419150728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10364de23113f269%3A0x467d7374a9b52640!2sKuagi%20Resources!5e0!3m2!1sen!2sng!4v1713843487320!5m2!1sen!2sng"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15784.365027720218!2d4.57276074867623!3d8.490507874807939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10364d7795564c15%3A0xa77efbf78223398d!2sMaayoit%20Healthcare%20Limited!5e0!3m2!1sen!2sng!4v1721143979771!5m2!1sen!2sng"
                 width={isAboveMediumScreens ? "90%" : "100%"}
                 height="750"
                 loading="lazy"
@@ -234,10 +239,11 @@ const Contact: React.FC = () => {
                   </div>
                   <div className=" ">
                     <button
+                      disabled={loading}
                       type="submit"
                       className="bg-primary py-4 px-8  font-semibold w-48 text-sm  text-white"
                     >
-                      Submit
+                      {loading ? "Loading..." : "Submit"}
                     </button>
                   </div>
                 </form>

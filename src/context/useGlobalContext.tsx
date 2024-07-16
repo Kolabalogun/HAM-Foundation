@@ -1,4 +1,13 @@
-import { createContext, useContext, ReactNode, FC, useState } from "react";
+import {
+  createContext,
+  useContext,
+  ReactNode,
+  FC,
+  useState,
+  useEffect,
+} from "react";
+import { fetchFirestoreData } from "../utils/fetchFirestoreData";
+import Loader from "../components/common/loader";
 
 export enum PageTye {
   home = "home",
@@ -7,6 +16,17 @@ export enum PageTye {
   contact = "contact",
   donation = "donation",
 }
+
+type ContactType = {
+  contactEmail: string;
+  contactPhone: string;
+  footerFacebookLink: string;
+  footerInstagramLink: string;
+  footerLinkedInLink: string;
+  footerTwitterLink: string;
+  footerYoutubeLink: string;
+  contactPhone2: string;
+};
 
 interface AppContextProps {
   loading: boolean;
@@ -17,6 +37,7 @@ interface AppContextProps {
   setNewsLike: React.Dispatch<React.SetStateAction<string[]>>;
   projectsLike: string[];
   setProjectsLike: React.Dispatch<React.SetStateAction<string[]>>;
+  contactInfo: ContactType;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -48,6 +69,35 @@ const AppProvider: FC<AppProviderProps> = ({ children }) => {
     safeParse("HamFoundationProjects")
   );
 
+  const [contactInfo, setContactInfo] = useState({
+    contactEmail: "info@hamfoundation.ng",
+    contactPhone: "+2348073374150",
+    footerFacebookLink: "https://facebook.com/groups/1130705441258503/",
+    footerInstagramLink: "https://www.instagram.com/hamfoundation_/",
+    footerLinkedInLink: "https://www.linkedin.com/groups/8166652/",
+    footerTwitterLink: "https://x.com/HAMFoundation_",
+    footerYoutubeLink:
+      "https://www.youtube.com/@HassanatAttairuMankoFoundation",
+    contactPhone2: "",
+  });
+
+  const getContactDetail = async () => {
+    setloading(true);
+    const data = await fetchFirestoreData("contents", "contact");
+    if (data) {
+      setContactInfo(data as ContactType);
+    }
+    setloading(false);
+  };
+
+  useEffect(() => {
+    getContactDetail();
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -59,6 +109,7 @@ const AppProvider: FC<AppProviderProps> = ({ children }) => {
         setNewsLike,
         projectsLike,
         setProjectsLike,
+        contactInfo,
       }}
     >
       {children}

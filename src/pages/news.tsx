@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/container/layout";
 import { Link } from "react-router-dom";
 import { News as NewsType } from "../utils/types";
@@ -9,6 +9,7 @@ import useFirestoreCollection from "../hook/useFiretoreCollection";
 import Loader from "../components/common/loader";
 import timeAgo from "../utils/timeAgo";
 import { ChatBubbleOvalLeftIcon } from "@heroicons/react/24/outline";
+import Pagination from "../components/common/pagination";
 
 const News: React.FC = () => {
   const { data, loader: loading } = useFirestoreCollection<NewsType>("news");
@@ -16,6 +17,23 @@ const News: React.FC = () => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+
+  const [dataTable, setDataTable] = useState<NewsType[]>([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
+
+  useEffect(() => {
+    // Get current items
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data?.slice(indexOfFirstItem, indexOfLastItem);
+
+    setDataTable(currentItems);
+  }, [currentPage, data, itemsPerPage]);
+
+  // Change page
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   if (loading) {
     return <Loader />;
@@ -26,7 +44,7 @@ const News: React.FC = () => {
       <>
         <section className="center py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-20  gap-x-10">
-            {data?.map((article: NewsType) => (
+            {dataTable?.map((article: NewsType) => (
               <div className="flex relative flex-col w-full shadow-lg">
                 <Link to={`/news/${article?.id}`}>
                   <div className="cursor-pointer   h-[300px]   ">
@@ -95,6 +113,15 @@ const News: React.FC = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="flex items-center justify-center mt-20 mb-10">
+            <Pagination
+              itemsPerPage={itemsPerPage}
+              totalItems={data.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
           </div>
         </section>
       </>
