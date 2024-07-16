@@ -19,6 +19,7 @@ type Formd = {
   firstName: string;
   message: string;
   email: string;
+  phone: string;
 };
 
 const Contact: React.FC = () => {
