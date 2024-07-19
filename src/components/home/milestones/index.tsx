@@ -1,7 +1,13 @@
 import { Button, Tooltip } from "@chakra-ui/react";
+
+import { MilestonesType } from "../../../pages/home";
 import React from "react";
 
-const Milestones: React.FC = () => {
+type MilestonesTypee = {
+  data: MilestonesType | null;
+};
+
+const Milestones: React.FC<MilestonesTypee> = ({ data }) => {
   return (
     <section className="center pb-44  hidden lg:block  sm:px-10 ">
       <h1 className="text-[#262626] text-center  text-[38px]    font-semibold mb-64">
@@ -14,16 +20,13 @@ const Milestones: React.FC = () => {
             <div className="p-2 rounded-full bg-black"></div>
             <div className="h-40 w-1 -mt-3 bg-black"></div>
             <div className="border-primary border-2 py-2 rotate-180 px-4 rounded-lg ">
-              <Tooltip
-                label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
-                placement="right"
-              >
+              <Tooltip label={data?.contentI} placement="right">
                 <Button
                   variant="outline"
                   border={"none"}
                   _hover={{ borderColor: "transparent" }}
                 >
-                  Jan 25
+                  {data?.titleI}
                 </Button>
               </Tooltip>
             </div>
@@ -33,16 +36,13 @@ const Milestones: React.FC = () => {
             <div className="p-2 rounded-full bg-black"></div>
             <div className="h-40 w-1 -mt-3 bg-black"></div>
             <div className="border-primary border-2 py-2  px-4 rounded-lg ">
-              <Tooltip
-                label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
-                placement="right"
-              >
+              <Tooltip label={data?.contentII} placement="right">
                 <Button
                   variant="outline"
                   border={"none"}
                   _hover={{ borderColor: "transparent" }}
                 >
-                  Jan 25
+                  {data?.titleII}
                 </Button>
               </Tooltip>
             </div>
@@ -52,16 +52,13 @@ const Milestones: React.FC = () => {
             <div className="p-2 rounded-full bg-black"></div>
             <div className="h-40 w-1 -mt-3 bg-black"></div>
             <div className="border-primary border-2 py-2 rotate-180 px-4 rounded-lg ">
-              <Tooltip
-                label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
-                placement="right"
-              >
+              <Tooltip label={data?.contentIII} placement="right">
                 <Button
                   variant="outline"
                   border={"none"}
                   _hover={{ borderColor: "transparent" }}
                 >
-                  Jan 25
+                  {data?.titleIII}
                 </Button>
               </Tooltip>
             </div>
@@ -71,16 +68,13 @@ const Milestones: React.FC = () => {
             <div className="p-2 rounded-full bg-black"></div>
             <div className="h-40 w-1 -mt-3 bg-black"></div>
             <div className="border-primary border-2 py-2   px-4 rounded-lg ">
-              <Tooltip
-                label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
-                placement="right"
-              >
+              <Tooltip label={data?.contentIV} placement="right">
                 <Button
                   variant="outline"
                   border={"none"}
                   _hover={{ borderColor: "transparent" }}
                 >
-                  Jan 25
+                  {data?.titleIV}
                 </Button>
               </Tooltip>
             </div>
@@ -90,16 +84,13 @@ const Milestones: React.FC = () => {
             <div className="p-2 rounded-full bg-black"></div>
             <div className="h-40 w-1 -mt-3 bg-black"></div>
             <div className="border-primary border-2 py-2 rotate-180 px-4 rounded-lg ">
-              <Tooltip
-                label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
-                placement="right"
-              >
+              <Tooltip label={data?.contentV} placement="right">
                 <Button
                   variant="outline"
                   border={"none"}
                   _hover={{ borderColor: "transparent" }}
                 >
-                  Jan 25
+                  {data?.titleV}
                 </Button>
               </Tooltip>
             </div>
@@ -109,16 +100,13 @@ const Milestones: React.FC = () => {
             <div className="p-2 rounded-full bg-black"></div>
             <div className="h-40 w-1 -mt-3 bg-black"></div>
             <div className="border-primary border-2 py-2   px-4 rounded-lg ">
-              <Tooltip
-                label="Become a member of the HAM Foundation and be a part of our mission to empower communities and transform lives. Your membership not only supports our efforts but also gives you the opportunity to actively engage in our programs and initiatives"
-                placement="right"
-              >
+              <Tooltip label={data?.contentVI} placement="right">
                 <Button
                   variant="outline"
                   border={"none"}
                   _hover={{ borderColor: "transparent" }}
                 >
-                  Jan 25
+                  {data?.titleVI}
                 </Button>
               </Tooltip>
             </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Hero from "../components/home/hero";
 import Roles from "../components/home/roles";
 import { useDisclosure } from "@chakra-ui/react";
@@ -14,15 +14,47 @@ import useFirestoreCollection from "../hook/useFiretoreCollection";
 import Loader from "../components/common/loader";
 import { Project } from "../utils/types";
 import Milestones from "../components/home/milestones";
+import { fetchFirestoreData } from "../utils/fetchFirestoreData";
+
+export type MilestonesType = {
+  titleI: string;
+  contentI: string;
+  contentII: string;
+  titleII: string;
+  contentIII: string;
+  titleIII: string;
+  contentIV: string;
+  titleIV: string;
+  titleV: string;
+  contentV: string;
+  titleVI: string;
+  contentVI: string;
+};
 
 const Home: React.FC = () => {
   const { setpageType } = useGlobalContext();
 
+  const [loader, setLoading] = useState(false);
+
+  const [milestones, setMilestones] = useState<MilestonesType | null>(null);
+
+  console.log(milestones);
+
   const { data, loader: loading } =
     useFirestoreCollection<Project>("pastprojects");
 
+  const getContactDetail = async () => {
+    setLoading(true);
+    const data = await fetchFirestoreData("contents", "milestones");
+    if (data) {
+      setMilestones(data as MilestonesType);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
     window.scroll(0, 0);
+    !milestones && getContactDetail();
     setpageType(PageTye.home);
   }, []);
 
@@ -33,7 +65,7 @@ const Home: React.FC = () => {
     onClose: partnerOnClose,
   } = useDisclosure();
 
-  if (loading) {
+  if (loading || loader) {
     return <Loader />;
   }
 
@@ -47,7 +79,7 @@ const Home: React.FC = () => {
         <Roles />
         <Impact />
         <Projects projects={data} />
-        <Milestones />
+        <Milestones data={milestones} />
         <Membership onOpen={onOpen} />
         <Footer />
       </main>
