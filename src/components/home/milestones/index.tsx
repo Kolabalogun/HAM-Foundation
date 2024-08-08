@@ -2,6 +2,7 @@ import { Button, Tooltip } from "@chakra-ui/react";
 
 import { MilestonesType } from "../../../pages/home";
 import React from "react";
+import Accordion from "./accordion";
 
 type MilestonesTypee = {
   data: MilestonesType | null;
@@ -9,12 +10,21 @@ type MilestonesTypee = {
 
 const Milestones: React.FC<MilestonesTypee> = ({ data }) => {
   return (
-    <section className="center pb-44  hidden lg:block  sm:px-10 ">
-      <h1 className="text-[#262626] text-center  text-[38px]    font-semibold mb-64">
+    <section className="center pb-44    sm:px-10 ">
+      <h1 className="text-[#262626] text-center  text-[38px]    font-semibold mb-24 lg:mb-64">
         Our Milestones
       </h1>
 
-      <div className=" font-medium sm:mx-10">
+      <div className=" lg:hidden">
+        <Accordion title={data?.titleI} content={data?.contentI} />
+        <Accordion title={data?.titleII} content={data?.contentII} />
+        <Accordion title={data?.titleIII} content={data?.contentIII} />
+        <Accordion title={data?.titleIV} content={data?.contentIV} />
+        <Accordion title={data?.titleV} content={data?.contentV} />
+        <Accordion title={data?.titleVI} content={data?.contentVI} />
+      </div>
+
+      <div className=" hidden lg:block font-medium sm:mx-10">
         <div className=" relative  h-1 bg-black w-full ">
           <div className="absolute -left-10 -translate-y-full rotate-180 top-2 flex items-center flex-col">
             <div className="p-2 rounded-full bg-black"></div>
