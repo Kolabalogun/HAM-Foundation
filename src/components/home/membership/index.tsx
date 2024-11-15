@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import img from "../../../assets/membership.png";
-import img2 from "../../../assets/help.png";
+import img2 from "../../../assets/hh.jpg";
 
 type MembershipType = {
   onOpen: () => void;

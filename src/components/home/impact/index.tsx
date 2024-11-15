@@ -33,7 +33,7 @@ const Impact = () => {
               <img src={MapImg} alt="" className="h-full w-full" />
             </div>
             <div className="text-center">
-              <h2 className="text-base ">Across 1 LGA</h2>
+              <h2 className="text-base ">Across 5 LGA</h2>
               <p className="text-sm">In about 100 Towns</p>
             </div>
           </div>

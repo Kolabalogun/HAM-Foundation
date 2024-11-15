@@ -12,6 +12,7 @@ import {
   MenuList,
   MenuItem,
   Button as ButtonChakra,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../../../context/useGlobalContext";
@@ -24,16 +25,21 @@ import {
   WHO_ARE_WE_ROUTE,
 } from "../../../router";
 import Button from "../button";
+import DonationModal from "../../home/modal/DonationModal";
 
 export type NavLinksProps = {
   title: string;
   link: string;
 };
 
-type Props = { donationOnOpen?: () => void };
-
-const Header = ({ donationOnOpen }: Props) => {
+const Header = () => {
   const { pageType } = useGlobalContext();
+
+  const {
+    isOpen: donationIsOpen,
+    onOpen: donationOnOpen,
+    onClose: donationOnClose,
+  } = useDisclosure();
 
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const [isAboveMediumScreens, setIsAboveMediumScreens] = useState<boolean>(
@@ -67,6 +73,7 @@ const Header = ({ donationOnOpen }: Props) => {
 
   return (
     <>
+      <DonationModal onClose={donationOnClose} isOpen={donationIsOpen} />
       <nav className="z-50 relative ">
         <div className="flex">
           <div className="bg-secondary h-1 flex-1 rounded-br-lg" />

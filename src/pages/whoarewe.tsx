@@ -26,7 +26,7 @@ const focusAreaData: FocusAreaType[] = [
     img: Digital,
     title: "Digital Economy and Innovation",
     decription:
-      "Advance education through scholarships, vocational training, and school support, and fostering unity for holistic development in the education sector",
+      "Foster digital community engagement and collaboration in the digital space by promoting job and entrepreneurship skills in the digital economy and providing business support, and sponsorship for innovative ventures. ",
   },
   {
     img: Agric,

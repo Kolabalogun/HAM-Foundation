@@ -81,11 +81,7 @@ const Home: React.FC = () => {
       <DonationModal onClose={donationOnClose} isOpen={donationIsOpen} />
 
       <main>
-        <Hero
-          onOpen={onOpen}
-          partnerOnOpen={partnerOnOpen}
-          donationOnOpen={donationOnOpen}
-        />
+        <Hero onOpen={onOpen} partnerOnOpen={partnerOnOpen} />
         <Roles />
         <Impact />
         <Projects projects={data} />

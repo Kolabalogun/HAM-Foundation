@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/container/layout";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import useFirestoreCollection from "../hook/useFiretoreCollection";
 import Loader from "../components/common/loader";
+import Pagination from "../components/common/pagination";
 
 type VideoDataType = {
   youtubeLink: string;
@@ -23,6 +24,23 @@ const Gallery: React.FC = () => {
     useFirestoreCollection<VideoDataType>("youtubeVideos");
 
   const { data: images, loader } = useFirestoreCollection<ImageType>("images");
+
+  const [dataTable, setDataTable] = useState<ImageType[]>([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+
+  useEffect(() => {
+    // Get current items
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = images?.slice(indexOfFirstItem, indexOfLastItem);
+
+    setDataTable(currentItems);
+  }, [currentPage, images, itemsPerPage]);
+
+  // Change page
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -78,7 +96,7 @@ const Gallery: React.FC = () => {
           </div>
 
           <div className="mt-32">
-            {images?.map((project: ImageType, idx) => (
+            {dataTable?.slice(0, 3)?.map((project: ImageType, idx) => (
               <div className="mt-16" key={idx}>
                 <p className="mb-10 text-3xl font-semibold  ">
                   {project?.name}{" "}
@@ -111,6 +129,15 @@ const Gallery: React.FC = () => {
                 </div>
               </div>
             ))}
+
+            <div className="flex items-center justify-center mt-20 mb-10">
+              <Pagination
+                itemsPerPage={itemsPerPage}
+                totalItems={images.length}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
+            </div>
 
             <div className=" ">
               {selectedImage && (
