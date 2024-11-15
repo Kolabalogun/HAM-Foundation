@@ -148,7 +148,7 @@ const Contact: React.FC = () => {
 
                 <p className="text-base font-medium">Opening Hours</p>
 
-                <p>Monday - Saturday</p>
+                <p>Monday - Friday</p>
                 <p>9am - 5pm</p>
               </div>
             </div>

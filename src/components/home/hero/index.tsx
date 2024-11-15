@@ -7,12 +7,17 @@ import React from "react";
 type HeroType = {
   onOpen: () => void;
   partnerOnOpen: () => void;
+  donationOnOpen: () => void;
 };
 
-const Hero: React.FC<HeroType> = ({ onOpen, partnerOnOpen }) => {
+const Hero: React.FC<HeroType> = ({
+  onOpen,
+  partnerOnOpen,
+  donationOnOpen,
+}) => {
   return (
     <section className="h-[80vh]  " id="home">
-      <Header />
+      <Header donationOnOpen={donationOnOpen} />
 
       <div className="relative   text-white h-full herobg pt-5 sm:pt-0 ">
         <div className="h-full w-full bg-[#000000b6] absolute top-0 left-0 "></div>

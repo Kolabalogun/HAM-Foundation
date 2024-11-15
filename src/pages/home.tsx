@@ -15,6 +15,7 @@ import Loader from "../components/common/loader";
 import { Project } from "../utils/types";
 import Milestones from "../components/home/milestones";
 import { fetchFirestoreData } from "../utils/fetchFirestoreData";
+import DonationModal from "../components/home/modal/DonationModal";
 
 export type MilestonesType = {
   titleI: string;
@@ -37,8 +38,6 @@ const Home: React.FC = () => {
   const [loader, setLoading] = useState(false);
 
   const [milestones, setMilestones] = useState<MilestonesType | null>(null);
-
-  console.log(milestones);
 
   const { data, loader: loading } =
     useFirestoreCollection<Project>("pastprojects");
@@ -65,6 +64,12 @@ const Home: React.FC = () => {
     onClose: partnerOnClose,
   } = useDisclosure();
 
+  const {
+    isOpen: donationIsOpen,
+    onOpen: donationOnOpen,
+    onClose: donationOnClose,
+  } = useDisclosure();
+
   if (loading || loader) {
     return <Loader />;
   }
@@ -73,14 +78,19 @@ const Home: React.FC = () => {
     <>
       <MembershipModal onClose={onClose} isOpen={isOpen} />
       <PartnershipModal onClose={partnerOnClose} isOpen={partnerIsOpen} />
+      <DonationModal onClose={donationOnClose} isOpen={donationIsOpen} />
 
       <main>
-        <Hero onOpen={onOpen} partnerOnOpen={partnerOnOpen} />
+        <Hero
+          onOpen={onOpen}
+          partnerOnOpen={partnerOnOpen}
+          donationOnOpen={donationOnOpen}
+        />
         <Roles />
         <Impact />
         <Projects projects={data} />
         <Milestones data={milestones} />
-        <Membership onOpen={onOpen} />
+        <Membership onOpen={onOpen} donationOnOpen={donationOnOpen} />
         <Footer />
       </main>
     </>

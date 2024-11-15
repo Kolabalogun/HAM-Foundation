@@ -271,9 +271,9 @@ const BlogDetails: React.FC = () => {
                       {form?.comments?.map((comment, idx) => (
                         <div key={idx} className="">
                           <p className="font-medium ">{comment.firstName}</p>
-                          <span className="text-sm font-medium">
+                          {/* <span className="text-sm font-medium">
                             {comment.email}
-                          </span>
+                          </span> */}
 
                           <p className="mt-3">{comment.message}</p>
                           {form?.comments.length - 1 !== idx && (

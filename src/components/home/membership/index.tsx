@@ -1,14 +1,13 @@
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import img from "../../../assets/membership.png";
 import img2 from "../../../assets/help.png";
-import { Link } from "react-router-dom";
-import { DONATION_ROUTE } from "../../../router";
 
 type MembershipType = {
   onOpen: () => void;
+  donationOnOpen: () => void;
 };
 
-const Membership: React.FC<MembershipType> = ({ onOpen }) => {
+const Membership: React.FC<MembershipType> = ({ onOpen, donationOnOpen }) => {
   return (
     <section className="center py-5 pb-20 sm:py-32   px-5 sm:px-10 ">
       <div className="">
@@ -68,14 +67,14 @@ const Membership: React.FC<MembershipType> = ({ onOpen }) => {
               change and impact lives
             </p>
 
-            <Link
-              to={DONATION_ROUTE}
+            <div
+              onClick={donationOnOpen}
               className="flex gap-4 items-center text-primary mt-6 cursor-pointer font-medium text-base"
             >
               <p>Donate now</p>
 
               <ArrowRightIcon className="h-6 font-medium" />
-            </Link>
+            </div>
           </div>
         </div>
       </div>
